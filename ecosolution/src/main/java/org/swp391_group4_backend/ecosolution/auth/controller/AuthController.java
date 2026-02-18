@@ -1,5 +1,6 @@
 package org.swp391_group4_backend.ecosolution.auth.controller;
 
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,7 +27,8 @@ public class AuthController {
   }
 
   @PostMapping
-  public ResponseEntity<AccountCreationResponseDto> createAccount(@RequestBody AccountCreationRequestDto accountCreationRequestDto) {
+  public ResponseEntity<AccountCreationResponseDto> createAccount(
+          @RequestBody @Valid AccountCreationRequestDto accountCreationRequestDto) {
 
     AccountCreationRequest accountCreationRequest = accountMapper.fromDto(accountCreationRequestDto);
     Account savedAccount = authService.createAccount(accountCreationRequest);

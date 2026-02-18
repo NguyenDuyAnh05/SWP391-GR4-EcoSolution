@@ -5,6 +5,7 @@ import org.swp391_group4_backend.ecosolution.auth.domain.AccountCreationRequest;
 import org.swp391_group4_backend.ecosolution.auth.domain.entity.Account;
 import org.swp391_group4_backend.ecosolution.auth.domain.entity.AccountRole;
 import org.swp391_group4_backend.ecosolution.auth.domain.entity.AccountStatus;
+import org.swp391_group4_backend.ecosolution.auth.exception.UsernameAlreadyExistedException;
 import org.swp391_group4_backend.ecosolution.auth.repository.AuthRepository;
 import org.swp391_group4_backend.ecosolution.auth.service.AuthService;
 
@@ -22,7 +23,7 @@ public class AuthServiceImpl implements AuthService {
   @Override
   public Account createAccount(AccountCreationRequest request) {
     if(accountRepository.existsByUsername(request.username())){
-      throw new RuntimeException("Username already exists");
+      throw new UsernameAlreadyExistedException(request.username());
     }
 
     Account account = new Account();
