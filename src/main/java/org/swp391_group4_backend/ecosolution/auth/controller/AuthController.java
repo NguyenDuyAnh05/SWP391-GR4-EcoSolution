@@ -8,7 +8,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.swp391_group4_backend.ecosolution.auth.domain.UserCreationRequest;
+import org.swp391_group4_backend.ecosolution.auth.domain.dto.request.AuthLoginRequestDto;
 import org.swp391_group4_backend.ecosolution.auth.domain.dto.request.UserCreationRequestDto;
+import org.swp391_group4_backend.ecosolution.auth.domain.dto.response.AuthTokenResponseDto;
 import org.swp391_group4_backend.ecosolution.auth.domain.dto.response.UserCreationResponseDto;
 import org.swp391_group4_backend.ecosolution.auth.domain.entity.User;
 import org.swp391_group4_backend.ecosolution.auth.mapper.UserMapper;
@@ -26,7 +28,7 @@ public class AuthController {
     this.userMapper = userMapper;
   }
 
-  @PostMapping
+  @PostMapping({"", "/register"})
   public ResponseEntity<UserCreationResponseDto> createUser(
           @RequestBody @Valid UserCreationRequestDto userCreationRequestDto) {
 
@@ -36,5 +38,13 @@ public class AuthController {
     return new ResponseEntity<>(responseDto, HttpStatus.CREATED) ;
   }
 
-
+  @PostMapping("/login")
+  public ResponseEntity<AuthTokenResponseDto> login(
+      @RequestBody @Valid AuthLoginRequestDto loginRequestDto) {
+    AuthTokenResponseDto response = authService.login(
+        loginRequestDto.username(),
+        loginRequestDto.password()
+    );
+    return ResponseEntity.ok(response);
+  }
 }

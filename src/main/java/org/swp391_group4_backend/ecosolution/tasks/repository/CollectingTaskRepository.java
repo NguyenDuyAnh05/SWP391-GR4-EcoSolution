@@ -2,6 +2,7 @@ package org.swp391_group4_backend.ecosolution.tasks.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.swp391_group4_backend.ecosolution.tasks.domain.entity.CollectingTask;
 import org.swp391_group4_backend.ecosolution.tasks.domain.entity.TaskStatus;
 
@@ -27,7 +28,7 @@ public interface CollectingTaskRepository extends JpaRepository<CollectingTask, 
   // Find active tasks for a collector
   @Query("SELECT t FROM CollectingTask t WHERE t.collector.id = :collectorId " +
          "AND t.currentStatus IN ('ASSIGNED', 'ACCEPTED', 'IN_PROGRESS')")
-  List<CollectingTask> findActiveTasksByCollector(UUID collectorId);
+  List<CollectingTask> findActiveTasksByCollector(@Param("collectorId") UUID collectorId);
 
   // Find tasks assigned within date range
   List<CollectingTask> findByAssignedAtBetween(LocalDateTime startDate, LocalDateTime endDate);
@@ -44,11 +45,8 @@ public interface CollectingTaskRepository extends JpaRepository<CollectingTask, 
   // Find overdue tasks
   @Query("SELECT t FROM CollectingTask t WHERE t.currentStatus = 'ASSIGNED' " +
          "AND t.assignedAt < :deadline AND t.startedAt IS NULL")
-  List<CollectingTask> findOverdueTasks(LocalDateTime deadline);
+  List<CollectingTask> findOverdueTasks(@Param("deadline") LocalDateTime deadline);
 
   // Check if report already has a task
   boolean existsByReportId(UUID reportId);
 }
-
-
-

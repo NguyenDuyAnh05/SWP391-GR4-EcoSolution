@@ -1,6 +1,7 @@
 package org.swp391_group4_backend.ecosolution.collectors.service.impl;
 
 import org.springframework.stereotype.Service;
+import org.springframework.data.domain.PageRequest;
 import org.swp391_group4_backend.ecosolution.collectors.domain.entity.CollectorScore;
 import org.swp391_group4_backend.ecosolution.collectors.repository.CollectorScoreRepository;
 import org.swp391_group4_backend.ecosolution.collectors.service.CollectorScoreService;
@@ -42,7 +43,9 @@ public class CollectorScoreServiceImpl implements CollectorScoreService {
   public void delete(UUID id) {
     collectorScoreRepository.deleteById(id);
   }
+
+  @Override
+  public List<CollectorScore> findTopCollectorsByReliability(int limit) {
+    return collectorScoreRepository.findTopCollectorsByReliability(PageRequest.of(0, limit));
+  }
 }
-
-
-

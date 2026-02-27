@@ -2,6 +2,7 @@ package org.swp391_group4_backend.ecosolution.collectors.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.query.Param;
 import org.swp391_group4_backend.ecosolution.collectors.domain.entity.CollectorScore;
 
@@ -21,8 +22,8 @@ public interface CollectorScoreRepository extends JpaRepository<CollectorScore, 
   List<CollectorScore> findByReliabilityScoreGreaterThanEqual(@Param("minScore") BigDecimal minScore);
 
   // Find top N collectors by reliability score
-  @Query("SELECT cs FROM CollectorScore cs ORDER BY cs.reliabilityScore DESC LIMIT :limit")
-  List<CollectorScore> findTopCollectorsByReliability(@Param("limit") int limit);
+  @Query("SELECT cs FROM CollectorScore cs ORDER BY cs.reliabilityScore DESC")
+  List<CollectorScore> findTopCollectorsByReliability(Pageable pageable);
 
   // Find collectors with low complaint rates
   @Query("SELECT cs FROM CollectorScore cs WHERE cs.complaintRate <= :maxRate " +
@@ -46,6 +47,3 @@ public interface CollectorScoreRepository extends JpaRepository<CollectorScore, 
   @Query("SELECT AVG(cs.reliabilityScore) FROM CollectorScore cs")
   BigDecimal calculateAverageReliabilityScore();
 }
-
-
-

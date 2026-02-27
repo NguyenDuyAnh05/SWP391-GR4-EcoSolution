@@ -16,7 +16,6 @@ public interface CollectorScoreService {
   CollectorScore update(UUID id, CollectorScore collectorScore);
 
   void delete(UUID id);
+
+  List<CollectorScore> findTopCollectorsByReliability(int limit);
 }
-
-
-

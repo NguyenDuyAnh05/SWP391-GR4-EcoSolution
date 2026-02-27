@@ -2,6 +2,7 @@ package org.swp391_group4_backend.ecosolution.complaints.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.swp391_group4_backend.ecosolution.complaints.domain.entity.Complaint;
 import org.swp391_group4_backend.ecosolution.complaints.domain.entity.ComplaintStatus;
 import org.swp391_group4_backend.ecosolution.complaints.domain.entity.ComplaintType;
@@ -42,8 +43,5 @@ public interface ComplaintRepository extends JpaRepository<Complaint, UUID> {
 
   // Find overdue complaints (open for more than X days)
   @Query("SELECT c FROM Complaint c WHERE c.status = 'OPEN' AND c.createdAt < :deadline")
-  List<Complaint> findOverdueComplaints(LocalDateTime deadline);
+  List<Complaint> findOverdueComplaints(@Param("deadline") LocalDateTime deadline);
 }
-
-
-

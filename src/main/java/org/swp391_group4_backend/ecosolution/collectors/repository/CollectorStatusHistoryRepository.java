@@ -1,7 +1,6 @@
 package org.swp391_group4_backend.ecosolution.collectors.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 import org.swp391_group4_backend.ecosolution.collectors.domain.entity.CollectorStatusHistory;
 import org.swp391_group4_backend.ecosolution.tasks.domain.entity.TaskStatus;
 
@@ -21,13 +20,8 @@ public interface CollectorStatusHistoryRepository extends JpaRepository<Collecto
   List<CollectorStatusHistory> findByChangedAtAfterOrderByChangedAtDesc(LocalDateTime date);
 
   // Get latest status change for a collector
-  @Query("SELECT h FROM CollectorStatusHistory h WHERE h.collector.id = :collectorId " +
-         "ORDER BY h.changedAt DESC LIMIT 1")
-  CollectorStatusHistory findLatestByCollectorId(UUID collectorId);
+  CollectorStatusHistory findTopByCollectorIdOrderByChangedAtDesc(UUID collectorId);
 
   // Find status changes within date range
   List<CollectorStatusHistory> findByChangedAtBetween(LocalDateTime startDate, LocalDateTime endDate);
 }
-
-
-
