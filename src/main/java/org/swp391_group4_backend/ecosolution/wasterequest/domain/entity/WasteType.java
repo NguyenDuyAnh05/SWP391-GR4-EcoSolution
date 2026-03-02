@@ -1,12 +1,8 @@
 package org.swp391_group4_backend.ecosolution.wasterequest.domain.entity;
 
+// BR05: Only these 3 waste types are allowed
 public enum WasteType {
-    ORGANIC,
-    PLASTIC,
-    PAPER,
-    GLASS,
-    METAL,
-    ELECTRONIC,
-    HAZARDOUS,
+    RECYCLABLE,
+    NON_RECYCLABLE,
     OTHER
 }

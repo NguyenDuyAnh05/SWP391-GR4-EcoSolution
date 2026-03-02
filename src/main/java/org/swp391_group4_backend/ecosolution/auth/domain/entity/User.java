@@ -17,7 +17,6 @@ import java.util.UUID;
 @Table(name = "users")
 public class User {
   @Id
-  @GeneratedValue(strategy = GenerationType.UUID)
   @Column(nullable = false, updatable = false)
   private UUID id;
 
@@ -38,4 +37,13 @@ public class User {
   @Column(nullable = false)
   private LocalDateTime createdAt;
 
+  @PrePersist
+  protected void onCreate() {
+    if (id == null) {
+      id = UUID.randomUUID();
+    }
+    if (createdAt == null) {
+      createdAt = LocalDateTime.now();
+    }
+  }
 }
