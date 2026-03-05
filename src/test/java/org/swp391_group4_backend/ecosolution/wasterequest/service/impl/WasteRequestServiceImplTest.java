@@ -475,4 +475,6 @@ class WasteRequestServiceImplTest {
 
         assertThrows(InvalidStateTransitionException.class, () -> wasteRequestService.acceptRequest(UUID.randomUUID(), collectorId));
     }
+
+
 }
