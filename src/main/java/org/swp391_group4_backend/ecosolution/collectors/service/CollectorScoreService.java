@@ -11,12 +11,13 @@ public interface CollectorScoreService {
 
   Optional<CollectorScore> getById(UUID id);
 
+  Optional<CollectorScore> getByCollectorId(UUID collectorId);
+
   List<CollectorScore> getAll();
 
   CollectorScore update(UUID id, CollectorScore collectorScore);
 
   void delete(UUID id);
 }
-
 
 

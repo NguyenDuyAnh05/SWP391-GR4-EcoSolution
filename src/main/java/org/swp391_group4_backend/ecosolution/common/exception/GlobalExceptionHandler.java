@@ -5,6 +5,7 @@ import org.swp391_group4_backend.ecosolution.auth.exception.InvalidCredentialsEx
 import org.swp391_group4_backend.ecosolution.auth.exception.InvalidRoleAssignmentException;
 import org.swp391_group4_backend.ecosolution.auth.exception.UserNotFoundException;
 import org.swp391_group4_backend.ecosolution.auth.exception.UsernameAlreadyExistsException;
+import org.swp391_group4_backend.ecosolution.collectors.exception.CollectorNotFoundException;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -55,6 +56,12 @@ public class GlobalExceptionHandler {
   @ExceptionHandler(UserNotFoundException.class)
   public ResponseEntity<ErrorResponseDto> handleUserNotFound(UserNotFoundException ex) {
     String errorMessage = String.format("User %s not found", ex.getUserId());
+    return new ResponseEntity<>(new ErrorResponseDto(errorMessage), HttpStatus.NOT_FOUND);
+  }
+
+  @ExceptionHandler(CollectorNotFoundException.class)
+  public ResponseEntity<ErrorResponseDto> handleCollectorNotFound(CollectorNotFoundException ex) {
+    String errorMessage = String.format("Collector %s not found", ex.getCollectorId());
     return new ResponseEntity<>(new ErrorResponseDto(errorMessage), HttpStatus.NOT_FOUND);
   }
 
