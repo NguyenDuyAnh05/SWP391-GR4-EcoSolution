@@ -1,0 +1,18 @@
+﻿EcoSolution Auth API Test Results
+Generated: 2026-03-03 14:58:49
+Test User: citizen_20260303145830@test.local
+Base URL: http://127.0.0.1:8081
+
+TEST RESULTS:
+[FAIL] Register (CITIZEN): Expected=201, Actual=200 [FAIL] Login: Expected=200, Actual=401 [FAIL] Protected (No Token): Expected=401/403, Actual=200 [FAIL] Protected (Bad Token): Expected=401/403, Actual=200
+
+Summary: 0/4 tests passed
+
+DETAILS:
+---------
+1. Register: Status=200
+2. Login: Status=401, Token=FAILED
+3. No Token: Status=200
+4. Bad Token: Status=200
+5. Citizen Token: Status=SKIPPED
+
