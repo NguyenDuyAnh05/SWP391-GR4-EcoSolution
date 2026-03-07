@@ -12,6 +12,12 @@ import org.swp391_group4_backend.ecosolution.auth.exception.UserNotFoundExceptio
 import org.swp391_group4_backend.ecosolution.auth.exception.UsernameAlreadyExistsException;
 import org.swp391_group4_backend.ecosolution.collectors.exception.CollectorNotFoundException;
 import org.swp391_group4_backend.ecosolution.common.domain.dto.response.ErrorResponseDto;
+import org.swp391_group4_backend.ecosolution.complaints.exception.ComplaintNotFoundException;
+import org.swp391_group4_backend.ecosolution.complaints.exception.ComplaintResolutionException;
+import org.swp391_group4_backend.ecosolution.fraud.exception.FraudSignalNotFoundException;
+import org.swp391_group4_backend.ecosolution.reports.exception.ReportStatusHistoryNotFoundException;
+import org.swp391_group4_backend.ecosolution.reports.exception.WasteReportImageNotFoundException;
+import org.swp391_group4_backend.ecosolution.reports.exception.WasteReportNotFoundException;
 import org.swp391_group4_backend.ecosolution.tasks.exception.InvalidTaskTransitionException;
 import org.swp391_group4_backend.ecosolution.tasks.exception.TaskAssignmentException;
 import org.swp391_group4_backend.ecosolution.tasks.exception.TaskNotFoundException;
@@ -66,10 +72,20 @@ public class GlobalExceptionHandler {
   public ResponseEntity<ErrorResponseDto> handleTaskAssignment(TaskAssignmentException ex) {
     return new ResponseEntity<>(new ErrorResponseDto(ex.getMessage()), HttpStatus.BAD_REQUEST);
   }
-  @ExceptionHandler(InvalidTaskTransitionException.class)
-  public ResponseEntity<ErrorResponseDto> handleInvalidTaskTransition(InvalidTaskTransitionException ex) {
-    String errorMessage = String.format("Task status cannot transition from %s to %s", ex.getFrom(), ex.getTo());
-    return new ResponseEntity<>(new ErrorResponseDto(errorMessage), HttpStatus.BAD_REQUEST);
+  @ExceptionHandler(WasteReportNotFoundException.class)
+  public ResponseEntity<ErrorResponseDto> handleWasteReportNotFound(WasteReportNotFoundException ex) {
+    String errorMessage = String.format("Waste report %s not found", ex.getReportId());
+    return new ResponseEntity<>(new ErrorResponseDto(errorMessage), HttpStatus.NOT_FOUND);
+  }
+  @ExceptionHandler(WasteReportImageNotFoundException.class)
+  public ResponseEntity<ErrorResponseDto> handleWasteReportImageNotFound(WasteReportImageNotFoundException ex) {
+    String errorMessage = String.format("Waste report image %s not found", ex.getImageId());
+    return new ResponseEntity<>(new ErrorResponseDto(errorMessage), HttpStatus.NOT_FOUND);
+  }
+  @ExceptionHandler(ReportStatusHistoryNotFoundException.class)
+  public ResponseEntity<ErrorResponseDto> handleReportStatusHistoryNotFound(ReportStatusHistoryNotFoundException ex) {
+    String errorMessage = String.format("Report status history %s not found", ex.getHistoryId());
+    return new ResponseEntity<>(new ErrorResponseDto(errorMessage), HttpStatus.NOT_FOUND);
   }
   @ExceptionHandler(AccessDeniedException.class)
   public ResponseEntity<ErrorResponseDto> handleAccessDenied(AccessDeniedException ex) {
