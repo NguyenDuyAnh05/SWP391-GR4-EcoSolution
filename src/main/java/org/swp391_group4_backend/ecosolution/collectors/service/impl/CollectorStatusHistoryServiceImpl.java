@@ -28,6 +28,11 @@ public class CollectorStatusHistoryServiceImpl implements CollectorStatusHistory
   }
 
   @Override
+  public List<CollectorStatusHistory> getByCollectorId(UUID collectorId) {
+    return collectorStatusHistoryRepository.findByCollectorIdOrderByChangedAtDesc(collectorId);
+  }
+
+  @Override
   public List<CollectorStatusHistory> getAll() {
     return collectorStatusHistoryRepository.findAll();
   }
@@ -43,6 +48,3 @@ public class CollectorStatusHistoryServiceImpl implements CollectorStatusHistory
     collectorStatusHistoryRepository.deleteById(id);
   }
 }
-
-
-

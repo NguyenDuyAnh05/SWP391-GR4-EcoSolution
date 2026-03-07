@@ -1,0 +1,177 @@
+package org.swp391_group4_backend.ecosolution.collectors.controller;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.context.annotation.Import;
+import org.springframework.security.test.context.support.WithMockUser;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.web.context.WebApplicationContext;
+import org.swp391_group4_backend.ecosolution.auth.config.SecurityConfig;
+import org.swp391_group4_backend.ecosolution.auth.domain.entity.User;
+import org.swp391_group4_backend.ecosolution.auth.domain.entity.UserRole;
+import org.swp391_group4_backend.ecosolution.auth.domain.entity.UserStatus;
+import org.swp391_group4_backend.ecosolution.auth.repository.UserRepository;
+import org.swp391_group4_backend.ecosolution.auth.security.JwtAuthenticationFilter;
+import org.swp391_group4_backend.ecosolution.collectors.controller.CollectorController;
+import org.swp391_group4_backend.ecosolution.collectors.domain.dto.request.CollectorScoreUpsertRequestDto;
+import org.swp391_group4_backend.ecosolution.collectors.domain.entity.CollectorScore;
+import org.swp391_group4_backend.ecosolution.collectors.domain.entity.CollectorStatusHistory;
+import org.swp391_group4_backend.ecosolution.collectors.service.CollectorScoreService;
+import org.swp391_group4_backend.ecosolution.collectors.service.CollectorStatusHistoryService;
+import org.swp391_group4_backend.ecosolution.common.exception.GlobalExceptionHandler;
+import org.swp391_group4_backend.ecosolution.tasks.domain.entity.TaskStatus;
+
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
+
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+@WebMvcTest(CollectorController.class)
+@Import({SecurityConfig.class, GlobalExceptionHandler.class})
+class CollectorControllerWebMvcTest {
+
+  @Autowired
+  private MockMvc mockMvc;
+
+  @Autowired
+  private ObjectMapper objectMapper;
+
+  @MockitoBean
+  private CollectorScoreService collectorScoreService;
+
+  @MockitoBean
+  private CollectorStatusHistoryService collectorStatusHistoryService;
+
+  @MockitoBean
+  private UserRepository userRepository;
+
+
+  @Test
+  @WithMockUser(roles = "COLLECTOR")
+  void getAllScores_shouldReturnPagedFilteredScores_forAllowedRole() throws Exception {
+    CollectorScore score1 = CollectorScore.builder()
+        .collectorId(UUID.randomUUID())
+        .responseRate(new BigDecimal("90.00"))
+        .completionRate(new BigDecimal("95.00"))
+        .complaintRate(new BigDecimal("3.00"))
+        .reliabilityScore(new BigDecimal("92.50"))
+        .updatedAt(LocalDateTime.now())
+        .build();
+
+    CollectorScore score2 = CollectorScore.builder()
+        .collectorId(UUID.randomUUID())
+        .responseRate(new BigDecimal("70.00"))
+        .completionRate(new BigDecimal("75.00"))
+        .complaintRate(new BigDecimal("8.00"))
+        .reliabilityScore(new BigDecimal("72.00"))
+        .updatedAt(LocalDateTime.now())
+        .build();
+
+    when(collectorScoreService.getAll()).thenReturn(List.of(score1, score2));
+
+    mockMvc.perform(get("/api/v1/collectors/scores")
+            .param("minReliability", "80")
+            .param("maxComplaintRate", "5")
+            .param("page", "0")
+            .param("size", "10"))
+        .andExpect(status().isOk())
+        .andExpect(jsonPath("$.length()").value(1))
+        .andExpect(jsonPath("$[0].collectorId").value(score1.getCollectorId().toString()));
+  }
+
+  @Test
+  @WithMockUser(roles = "CITIZEN")
+  void getAllScores_shouldReturnForbidden_forUnauthorizedRole() throws Exception {
+    mockMvc.perform(get("/api/v1/collectors/scores"))
+        .andExpect(status().isForbidden());
+  }
+
+  @Test
+  @WithMockUser(roles = "COLLECTOR")
+  void upsertCollectorScore_shouldReturnForbidden_forUnauthorizedRole() throws Exception {
+    UUID collectorId = UUID.randomUUID();
+
+    CollectorScoreUpsertRequestDto request = new CollectorScoreUpsertRequestDto(
+        new BigDecimal("90"),
+        new BigDecimal("90"),
+        new BigDecimal("5"),
+        new BigDecimal("88")
+    );
+
+    mockMvc.perform(put("/api/v1/collectors/{collectorId}/score", collectorId)
+            .contentType("application/json")
+            .content(objectMapper.writeValueAsString(request)))
+        .andExpect(status().isForbidden());
+  }
+
+  @Test
+  @WithMockUser(roles = "ASSIGNOR")
+  void createStatusHistory_shouldReturnCreated_forAllowedRole() throws Exception {
+    UUID collectorId = UUID.randomUUID();
+    User collector = User.builder()
+        .id(collectorId)
+        .name("Collector A")
+        .email("collector@example.com")
+        .role(UserRole.COLLECTOR)
+        .status(UserStatus.ACTIVE)
+        .createdAt(LocalDateTime.now())
+        .build();
+
+    CollectorStatusHistory history = CollectorStatusHistory.builder()
+        .id(UUID.randomUUID())
+        .collector(collector)
+        .statusFrom(TaskStatus.ASSIGNED)
+        .statusTo(TaskStatus.IN_PROGRESS)
+        .reason("Accepted task")
+        .changedAt(LocalDateTime.now())
+        .build();
+
+    when(userRepository.findById(collectorId)).thenReturn(Optional.of(collector));
+    when(collectorStatusHistoryService.create(any(CollectorStatusHistory.class))).thenReturn(history);
+
+    String body = "{" +
+        "\"statusFrom\":\"ASSIGNED\"," +
+        "\"statusTo\":\"IN_PROGRESS\"," +
+        "\"reason\":\"Accepted task\"" +
+        "}";
+
+    mockMvc.perform(post("/api/v1/collectors/{collectorId}/status-history", collectorId)
+            .contentType("application/json")
+            .content(body))
+        .andExpect(status().isCreated())
+        .andExpect(jsonPath("$.collectorId").value(collectorId.toString()))
+        .andExpect(jsonPath("$.statusFrom").value("ASSIGNED"))
+        .andExpect(jsonPath("$.statusTo").value("IN_PROGRESS"));
+  }
+
+  @Test
+  @WithMockUser(roles = "COLLECTOR")
+  void createStatusHistory_shouldReturnForbidden_forUnauthorizedRole() throws Exception {
+    UUID collectorId = UUID.randomUUID();
+
+    String body = "{" +
+        "\"statusFrom\":\"ASSIGNED\"," +
+        "\"statusTo\":\"IN_PROGRESS\"" +
+        "}";
+
+    mockMvc.perform(post("/api/v1/collectors/{collectorId}/status-history", collectorId)
+            .contentType("application/json")
+            .content(body))
+        .andExpect(status().isForbidden());
+  }
+}
+
+

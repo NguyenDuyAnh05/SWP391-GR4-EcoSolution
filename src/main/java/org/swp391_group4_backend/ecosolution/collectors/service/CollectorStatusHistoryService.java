@@ -11,6 +11,8 @@ public interface CollectorStatusHistoryService {
 
   Optional<CollectorStatusHistory> getById(UUID id);
 
+  List<CollectorStatusHistory> getByCollectorId(UUID collectorId);
+
   List<CollectorStatusHistory> getAll();
 
   CollectorStatusHistory update(UUID id, CollectorStatusHistory collectorStatusHistory);

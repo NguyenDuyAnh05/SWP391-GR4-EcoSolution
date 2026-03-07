@@ -1,0 +1,211 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ---------------< org.swp391-group4-backend:ecosolution >----------------
+[INFO] Building ecosolution 0.0.1-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] >>> spring-boot:4.0.2:run (default-cli) > test-compile @ ecosolution >>>
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ ecosolution ---
+[INFO] Copying 2 resources from src\main\resources to target\classes
+[INFO] Copying 0 resource from src\main\resources to target\classes
+[INFO] 
+[INFO] --- compiler:3.14.1:compile (default-compile) @ ecosolution ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 101 source files with javac [debug parameters release 21] to target\classes
+[INFO] /D:/FPT/SWP391/Project/SWP391-GR4-EcoSolution-HaiPT2002/src/main/java/org/swp391_group4_backend/ecosolution/auth/security/JwtAuthenticationFilter.java: D:\FPT\SWP391\Project\SWP391-GR4-EcoSolution-HaiPT2002\src\main\java\org\swp391_group4_backend\ecosolution\auth\security\JwtAuthenticationFilter.java uses or overrides a deprecated API.
+[INFO] /D:/FPT/SWP391/Project/SWP391-GR4-EcoSolution-HaiPT2002/src/main/java/org/swp391_group4_backend/ecosolution/auth/security/JwtAuthenticationFilter.java: Recompile with -Xlint:deprecation for details.
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ ecosolution ---
+[INFO] skip non existing resourceDirectory D:\FPT\SWP391\Project\SWP391-GR4-EcoSolution-HaiPT2002\src\test\resources
+[INFO] 
+[INFO] --- compiler:3.14.1:testCompile (default-testCompile) @ ecosolution ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 1 source file with javac [debug parameters release 21] to target\test-classes
+[INFO] 
+[INFO] <<< spring-boot:4.0.2:run (default-cli) < test-compile @ ecosolution <<<
+[INFO] 
+[INFO] 
+[INFO] --- spring-boot:4.0.2:run (default-cli) @ ecosolution ---
+[INFO] Attaching agents: []
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v4.0.2)
+
+2026-03-07T20:13:48.048+07:00  INFO 15632 --- [ecosolution] [           main] o.s.ecosolution.EcosolutionApplication   : Starting EcosolutionApplication using Java 23.0.1 with PID 15632 (D:\FPT\SWP391\Project\SWP391-GR4-EcoSolution-HaiPT2002\target\classes started by PC in D:\FPT\SWP391\Project\SWP391-GR4-EcoSolution-HaiPT2002)
+2026-03-07T20:13:48.051+07:00  INFO 15632 --- [ecosolution] [           main] o.s.ecosolution.EcosolutionApplication   : No active profile set, falling back to 1 default profile: "default"
+2026-03-07T20:13:48.828+07:00  INFO 15632 --- [ecosolution] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-03-07T20:13:48.927+07:00  INFO 15632 --- [ecosolution] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 90 ms. Found 12 JPA repository interfaces.
+2026-03-07T20:13:49.399+07:00  INFO 15632 --- [ecosolution] [           main] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 8080 (http)
+2026-03-07T20:13:49.410+07:00  INFO 15632 --- [ecosolution] [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-03-07T20:13:49.411+07:00  INFO 15632 --- [ecosolution] [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.15]
+2026-03-07T20:13:49.470+07:00  INFO 15632 --- [ecosolution] [           main] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 1356 ms
+2026-03-07T20:13:49.639+07:00  INFO 15632 --- [ecosolution] [           main] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-03-07T20:13:49.682+07:00  INFO 15632 --- [ecosolution] [           main] org.hibernate.orm.core                   : HHH000001: Hibernate ORM core version 7.2.1.Final
+2026-03-07T20:13:50.075+07:00  INFO 15632 --- [ecosolution] [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-03-07T20:13:50.103+07:00  INFO 15632 --- [ecosolution] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-03-07T20:13:50.236+07:00  INFO 15632 --- [ecosolution] [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:ecosolution user=SA
+2026-03-07T20:13:50.238+07:00  INFO 15632 --- [ecosolution] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-03-07T20:13:50.255+07:00  WARN 15632 --- [ecosolution] [           main] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-03-07T20:13:50.274+07:00  INFO 15632 --- [ecosolution] [           main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [jdbc:h2:mem:ecosolution]
+	Database driver: H2 JDBC Driver
+	Database dialect: H2Dialect
+	Database version: 2.4.240
+	Default catalog/schema: ECOSOLUTION/PUBLIC
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: 100
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-03-07T20:13:51.087+07:00  INFO 15632 --- [ecosolution] [           main] org.hibernate.orm.core                   : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+Hibernate: drop table if exists collecting_task cascade 
+Hibernate: drop table if exists collector_score cascade 
+Hibernate: drop table if exists collector_status_history cascade 
+Hibernate: drop table if exists complaint cascade 
+Hibernate: drop table if exists complaint_resolution cascade 
+Hibernate: drop table if exists fraud_signal cascade 
+Hibernate: drop table if exists report_status_history cascade 
+Hibernate: drop table if exists user_auth cascade 
+Hibernate: drop table if exists users cascade 
+Hibernate: drop table if exists waste_report cascade 
+Hibernate: drop table if exists waste_report_image cascade 
+Hibernate: create table collecting_task (assigned_at timestamp(6) not null, completed_at timestamp(6), started_at timestamp(6), collector_id uuid not null, id uuid not null, report_id uuid not null, current_status enum ('ACCEPTED','ASSIGNED','CANCELLED','COMPLETED','IN_PROGRESS') not null, primary key (id))
+Hibernate: create table collector_score (complaint_rate numeric(5,2) not null, completion_rate numeric(5,2) not null, reliability_score numeric(5,2) not null, response_rate numeric(5,2) not null, updated_at timestamp(6) not null, collector_id uuid not null, primary key (collector_id))
+Hibernate: create table collector_status_history (changed_at timestamp(6) not null, collector_id uuid not null, id uuid not null, reason TEXT, status_from enum ('ACCEPTED','ASSIGNED','CANCELLED','COMPLETED','IN_PROGRESS') not null, status_to enum ('ACCEPTED','ASSIGNED','CANCELLED','COMPLETED','IN_PROGRESS') not null, primary key (id))
+Hibernate: create table complaint (created_at timestamp(6) not null, resolved_at timestamp(6), citizen_id uuid not null, id uuid not null, report_id uuid not null, description TEXT not null, status enum ('IN_REVIEW','OPEN','REJECTED','RESOLVED') not null, type enum ('DAMAGED_PROPERTY','NOT_COLLECTED','OTHER','RUDE_COLLECTOR','WRONG_WEIGHT') not null, primary key (id))
+Hibernate: create table complaint_resolution (created_at timestamp(6) not null, admin_id uuid not null, complaint_id uuid not null unique, id uuid not null, note TEXT, result enum ('APPROVED','COMPENSATED','ESCALATED','REJECTED') not null, primary key (id))
+Hibernate: create table fraud_signal (score integer not null, created_at timestamp(6) not null, citizen_id uuid not null, id uuid not null, report_id uuid not null, type enum ('DUPLICATE_REPORT','FALSE_LOCATION','OTHER','SUSPICIOUS_PATTERN','WEIGHT_MANIPULATION') not null, primary key (id))
+Hibernate: create table report_status_history (changed_at timestamp(6) not null, changed_by uuid not null, id uuid not null, report_id uuid not null, reason TEXT, status_from enum ('ASSIGNED','CANCELLED','COMPLETED','IN_PROGRESS','PENDING','VERIFIED') not null, status_to enum ('ASSIGNED','CANCELLED','COMPLETED','IN_PROGRESS','PENDING','VERIFIED') not null, primary key (id))
+Hibernate: create table user_auth (created_at timestamp(6) not null, user_id uuid not null, google_id varchar(255), password_hash varchar(255) not null, username varchar(255) not null, primary key (user_id))
+Hibernate: create table users (created_at timestamp(6) not null, id uuid not null, email varchar(255) not null unique, name varchar(255) not null, role enum ('ASSIGNOR','CITIZEN','COLLECTOR','ENTERPRISE_ADMIN','SYSTEM_ADMIN') not null, status enum ('ACTIVE','BANNED') not null, primary key (id))
+Hibernate: create table waste_report (declared_weight numeric(10,2) not null, latitude numeric(10,6) not null, longitude numeric(10,6) not null, verified_weight numeric(10,2), created_at timestamp(6) not null, sla_deadline_at timestamp(6), citizen_id uuid not null, id uuid not null, description TEXT not null, cancel_reason_code enum ('ALREADY_COLLECTED','DUPLICATE','FALSE_REPORT','INVALID_LOCATION','OTHER'), current_status enum ('ASSIGNED','CANCELLED','COMPLETED','IN_PROGRESS','PENDING','VERIFIED') not null, primary key (id))
+Hibernate: create table waste_report_image (created_at timestamp(6) not null, id uuid not null, report_id uuid not null, image_url varchar(255) not null, primary key (id))
+Hibernate: alter table if exists collecting_task add constraint FK2qw3a5agfkaitrddbm8oi1v0t foreign key (collector_id) references users
+Hibernate: alter table if exists collecting_task add constraint FKji7dadtv0pwsj652k2gpw6yda foreign key (report_id) references waste_report
+Hibernate: alter table if exists collector_score add constraint FKhjyelha7ifvpi4jr8h04vjtyn foreign key (collector_id) references users
+Hibernate: alter table if exists collector_status_history add constraint FK4y8dln1pa5882qumx9v896aj9 foreign key (collector_id) references users
+Hibernate: alter table if exists complaint add constraint FKimnk5tgej6493mie74wphas9j foreign key (citizen_id) references users
+Hibernate: alter table if exists complaint add constraint FK4163a0rgyfu8hdxoqth76kufo foreign key (report_id) references waste_report
+Hibernate: alter table if exists complaint_resolution add constraint FKdr7u0x8lie3q4dq0nj8xgfmj3 foreign key (admin_id) references users
+Hibernate: alter table if exists complaint_resolution add constraint FKi7eu23oupcv93yfpvjgkvtx2g foreign key (complaint_id) references complaint
+Hibernate: alter table if exists fraud_signal add constraint FKtpe6kwe0e63u8pcx9ykpyib8x foreign key (citizen_id) references users
+Hibernate: alter table if exists fraud_signal add constraint FKdl4r5s4pddre3ej3d9yjph8u foreign key (report_id) references waste_report
+Hibernate: alter table if exists report_status_history add constraint FK17yef48ah6955d7vm594st7ap foreign key (changed_by) references users
+Hibernate: alter table if exists report_status_history add constraint FK5t1ah7r4x8q5h3uf1plc3iffg foreign key (report_id) references waste_report
+Hibernate: alter table if exists user_auth add constraint FK9hog4tmdalcddidanohglx6gl foreign key (user_id) references users
+Hibernate: alter table if exists waste_report add constraint FKipakhg8hqyb8c1q9kff6fg6me foreign key (citizen_id) references users
+Hibernate: alter table if exists waste_report_image add constraint FK42ctx0qdosj0lfm1cc0316gdp foreign key (report_id) references waste_report
+2026-03-07T20:13:51.150+07:00  INFO 15632 --- [ecosolution] [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-03-07T20:13:51.234+07:00  INFO 15632 --- [ecosolution] [           main] o.s.d.j.r.query.QueryEnhancerFactories   : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-03-07T20:13:52.419+07:00  WARN 15632 --- [ecosolution] [           main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-03-07T20:13:52.919+07:00  INFO 15632 --- [ecosolution] [           main] o.s.b.h.a.H2ConsoleAutoConfiguration     : H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:ecosolution'
+2026-03-07T20:13:52.991+07:00  INFO 15632 --- [ecosolution] [           main] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 8080 (http) with context path '/'
+2026-03-07T20:13:52.996+07:00  INFO 15632 --- [ecosolution] [           main] o.s.ecosolution.EcosolutionApplication   : Started EcosolutionApplication in 5.291 seconds (process running for 5.679)
+Hibernate: select count(*) from users u1_0
+2026-03-07T20:13:53.059+07:00  INFO 15632 --- [ecosolution] [           main] o.s.e.common.config.DataInitializer      : Initializing database with sample data...
+Hibernate: insert into users (created_at,email,name,role,status,id) values (?,?,?,?,?,?)
+Hibernate: select ua1_0.user_id,ua1_0.created_at,ua1_0.google_id,ua1_0.password_hash,u1_0.id,u1_0.created_at,u1_0.email,u1_0.name,u1_0.role,u1_0.status,ua1_0.username from user_auth ua1_0 join users u1_0 on u1_0.id=ua1_0.user_id where ua1_0.user_id=?
+2026-03-07T20:13:53.170+07:00 ERROR 15632 --- [ecosolution] [           main] org.hibernate.orm.core                   : HHH000099: an assertion failure occurred (this may indicate a bug in Hibernate, but is more likely due to unsafe use of the session): org.hibernate.AssertionFailure: null identifier (org.swp391_group4_backend.ecosolution.auth.domain.entity.UserAuth)
+2026-03-07T20:13:53.176+07:00  INFO 15632 --- [ecosolution] [           main] .s.b.a.l.ConditionEvaluationReportLogger : 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2026-03-07T20:13:53.185+07:00 ERROR 15632 --- [ecosolution] [           main] o.s.boot.SpringApplication               : Application run failed
+
+org.hibernate.AssertionFailure: null identifier (org.swp391_group4_backend.ecosolution.auth.domain.entity.UserAuth)
+	at org.hibernate.engine.spi.EntityKey.<init>(EntityKey.java:52) ~[hibernate-core-7.2.1.Final.jar:7.2.1.Final]
+	at org.hibernate.internal.AbstractSharedSessionContract.generateEntityKey(AbstractSharedSessionContract.java:809) ~[hibernate-core-7.2.1.Final.jar:7.2.1.Final]
+	at org.hibernate.internal.SessionImpl.generateEntityKey(SessionImpl.java:155) ~[hibernate-core-7.2.1.Final.jar:7.2.1.Final]
+	at org.hibernate.type.OneToOneType.isNull(OneToOneType.java:69) ~[hibernate-core-7.2.1.Final.jar:7.2.1.Final]
+	at org.hibernate.type.EntityType.resolve(EntityType.java:405) ~[hibernate-core-7.2.1.Final.jar:7.2.1.Final]
+	at org.hibernate.type.EntityType.replace(EntityType.java:334) ~[hibernate-core-7.2.1.Final.jar:7.2.1.Final]
+	at org.hibernate.type.AbstractType.replace(AbstractType.java:116) ~[hibernate-core-7.2.1.Final.jar:7.2.1.Final]
+	at org.hibernate.type.TypeHelper.replace(TypeHelper.java:152) ~[hibernate-core-7.2.1.Final.jar:7.2.1.Final]
+	at org.hibernate.event.internal.DefaultMergeEventListener.entityIsTransient(DefaultMergeEventListener.java:292) ~[hibernate-core-7.2.1.Final.jar:7.2.1.Final]
+	at org.hibernate.event.internal.DefaultMergeEventListener.entityIsDetached(DefaultMergeEventListener.java:440) ~[hibernate-core-7.2.1.Final.jar:7.2.1.Final]
+	at org.hibernate.event.internal.DefaultMergeEventListener.merge(DefaultMergeEventListener.java:192) ~[hibernate-core-7.2.1.Final.jar:7.2.1.Final]
+	at org.hibernate.event.internal.DefaultMergeEventListener.doMerge(DefaultMergeEventListener.java:136) ~[hibernate-core-7.2.1.Final.jar:7.2.1.Final]
+	at org.hibernate.event.internal.DefaultMergeEventListener.onMerge(DefaultMergeEventListener.java:120) ~[hibernate-core-7.2.1.Final.jar:7.2.1.Final]
+	at org.hibernate.event.internal.DefaultMergeEventListener.onMerge(DefaultMergeEventListener.java:77) ~[hibernate-core-7.2.1.Final.jar:7.2.1.Final]
+	at org.hibernate.event.service.internal.EventListenerGroupImpl.fireEventOnEachListener(EventListenerGroupImpl.java:138) ~[hibernate-core-7.2.1.Final.jar:7.2.1.Final]
+	at org.hibernate.internal.SessionImpl.fireMerge(SessionImpl.java:797) ~[hibernate-core-7.2.1.Final.jar:7.2.1.Final]
+	at org.hibernate.internal.SessionImpl.merge(SessionImpl.java:782) ~[hibernate-core-7.2.1.Final.jar:7.2.1.Final]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+	at org.springframework.orm.jpa.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler.invoke(SharedEntityManagerCreator.java:317) ~[spring-orm-7.0.3.jar:7.0.3]
+	at jdk.proxy2/jdk.proxy2.$Proxy144.merge(Unknown Source) ~[na:na]
+	at org.springframework.data.jpa.repository.support.SimpleJpaRepository.save(SimpleJpaRepository.java:667) ~[spring-data-jpa-4.0.2.jar:4.0.2]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:359) ~[spring-aop-7.0.3.jar:7.0.3]
+	at org.springframework.data.repository.core.support.RepositoryMethodInvoker$RepositoryFragmentMethodInvoker.lambda$new$0(RepositoryMethodInvoker.java:278) ~[spring-data-commons-4.0.2.jar:4.0.2]
+	at org.springframework.data.repository.core.support.RepositoryMethodInvoker.doInvoke(RepositoryMethodInvoker.java:169) ~[spring-data-commons-4.0.2.jar:4.0.2]
+	at org.springframework.data.repository.core.support.RepositoryMethodInvoker.invoke(RepositoryMethodInvoker.java:158) ~[spring-data-commons-4.0.2.jar:4.0.2]
+	at org.springframework.data.repository.core.support.RepositoryComposition$RepositoryFragments.invoke(RepositoryComposition.java:545) ~[spring-data-commons-4.0.2.jar:4.0.2]
+	at org.springframework.data.repository.core.support.RepositoryComposition.invoke(RepositoryComposition.java:290) ~[spring-data-commons-4.0.2.jar:4.0.2]
+	at org.springframework.data.repository.core.support.RepositoryFactorySupport$ImplementationMethodExecutionInterceptor.invoke(RepositoryFactorySupport.java:690) ~[spring-data-commons-4.0.2.jar:4.0.2]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179) ~[spring-aop-7.0.3.jar:7.0.3]
+	at org.springframework.data.repository.core.support.QueryExecutorMethodInterceptor.doInvoke(QueryExecutorMethodInterceptor.java:171) ~[spring-data-commons-4.0.2.jar:4.0.2]
+	at org.springframework.data.repository.core.support.QueryExecutorMethodInterceptor.invoke(QueryExecutorMethodInterceptor.java:146) ~[spring-data-commons-4.0.2.jar:4.0.2]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179) ~[spring-aop-7.0.3.jar:7.0.3]
+	at org.springframework.data.projection.DefaultMethodInvokingMethodInterceptor.invoke(DefaultMethodInvokingMethodInterceptor.java:69) ~[spring-data-commons-4.0.2.jar:4.0.2]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179) ~[spring-aop-7.0.3.jar:7.0.3]
+	at org.springframework.transaction.interceptor.TransactionInterceptor$1.proceedWithInvocation(TransactionInterceptor.java:133) ~[spring-tx-7.0.3.jar:7.0.3]
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:371) ~[spring-tx-7.0.3.jar:7.0.3]
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:130) ~[spring-tx-7.0.3.jar:7.0.3]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179) ~[spring-aop-7.0.3.jar:7.0.3]
+	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:135) ~[spring-tx-7.0.3.jar:7.0.3]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179) ~[spring-aop-7.0.3.jar:7.0.3]
+	at org.springframework.data.jpa.repository.support.CrudMethodMetadataPostProcessor$CrudMethodMetadataPopulatingMethodInterceptor.invoke(CrudMethodMetadataPostProcessor.java:166) ~[spring-data-jpa-4.0.2.jar:4.0.2]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179) ~[spring-aop-7.0.3.jar:7.0.3]
+	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:222) ~[spring-aop-7.0.3.jar:7.0.3]
+	at jdk.proxy2/jdk.proxy2.$Proxy154.save(Unknown Source) ~[na:na]
+	at org.swp391_group4_backend.ecosolution.common.config.DataInitializer.createAndSaveUser(DataInitializer.java:263) ~[classes/:na]
+	at org.swp391_group4_backend.ecosolution.common.config.DataInitializer.lambda$initializeData$0(DataInitializer.java:49) ~[classes/:na]
+	at org.springframework.boot.SpringApplication.lambda$callRunner$1(SpringApplication.java:792) ~[spring-boot-4.0.2.jar:4.0.2]
+	at org.springframework.util.function.ThrowingConsumer$1.acceptWithException(ThrowingConsumer.java:82) ~[spring-core-7.0.3.jar:7.0.3]
+	at org.springframework.util.function.ThrowingConsumer.accept(ThrowingConsumer.java:60) ~[spring-core-7.0.3.jar:7.0.3]
+	at org.springframework.util.function.ThrowingConsumer$1.accept(ThrowingConsumer.java:86) ~[spring-core-7.0.3.jar:7.0.3]
+	at org.springframework.boot.SpringApplication.callRunner(SpringApplication.java:800) ~[spring-boot-4.0.2.jar:4.0.2]
+	at org.springframework.boot.SpringApplication.callRunner(SpringApplication.java:791) ~[spring-boot-4.0.2.jar:4.0.2]
+	at org.springframework.boot.SpringApplication.lambda$callRunners$0(SpringApplication.java:776) ~[spring-boot-4.0.2.jar:4.0.2]
+	at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.accept(ForEachOps.java:184) ~[na:na]
+	at java.base/java.util.stream.SortedOps$SizedRefSortingSink.end(SortedOps.java:357) ~[na:na]
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:571) ~[na:na]
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:560) ~[na:na]
+	at java.base/java.util.stream.ForEachOps$ForEachOp.evaluateSequential(ForEachOps.java:151) ~[na:na]
+	at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.evaluateSequential(ForEachOps.java:174) ~[na:na]
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:265) ~[na:na]
+	at java.base/java.util.stream.ReferencePipeline.forEach(ReferencePipeline.java:636) ~[na:na]
+	at org.springframework.boot.SpringApplication.callRunners(SpringApplication.java:776) ~[spring-boot-4.0.2.jar:4.0.2]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:328) ~[spring-boot-4.0.2.jar:4.0.2]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1365) ~[spring-boot-4.0.2.jar:4.0.2]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1354) ~[spring-boot-4.0.2.jar:4.0.2]
+	at org.swp391_group4_backend.ecosolution.EcosolutionApplication.main(EcosolutionApplication.java:10) ~[classes/:na]
+
+2026-03-07T20:13:53.191+07:00  INFO 15632 --- [ecosolution] [           main] o.s.boot.tomcat.GracefulShutdown         : Commencing graceful shutdown. Waiting for active requests to complete
+2026-03-07T20:13:53.200+07:00  INFO 15632 --- [ecosolution] [tomcat-shutdown] o.s.boot.tomcat.GracefulShutdown         : Graceful shutdown complete
+2026-03-07T20:13:53.204+07:00  INFO 15632 --- [ecosolution] [           main] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-03-07T20:13:53.206+07:00  INFO 15632 --- [ecosolution] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2026-03-07T20:13:53.209+07:00  INFO 15632 --- [ecosolution] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  14.207 s
+[INFO] Finished at: 2026-03-07T20:13:53+07:00
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.springframework.boot:spring-boot-maven-plugin:4.0.2:run (default-cli) on project ecosolution: Process terminated with exit code: 1 -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoExecutionException

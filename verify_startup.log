@@ -1,0 +1,228 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ---------------< org.swp391-group4-backend:ecosolution >----------------
+[INFO] Building ecosolution 0.0.1-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] >>> spring-boot:4.0.2:run (default-cli) > test-compile @ ecosolution >>>
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ ecosolution ---
+[INFO] Copying 2 resources from src\main\resources to target\classes
+[INFO] Copying 0 resource from src\main\resources to target\classes
+[INFO] 
+[INFO] --- compiler:3.14.1:compile (default-compile) @ ecosolution ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ ecosolution ---
+[INFO] skip non existing resourceDirectory D:\FPT\SWP391\Project\SWP391-GR4-EcoSolution-HaiPT2002\src\test\resources
+[INFO] 
+[INFO] --- compiler:3.14.1:testCompile (default-testCompile) @ ecosolution ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] <<< spring-boot:4.0.2:run (default-cli) < test-compile @ ecosolution <<<
+[INFO] 
+[INFO] 
+[INFO] --- spring-boot:4.0.2:run (default-cli) @ ecosolution ---
+[INFO] Attaching agents: []
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v4.0.2)
+
+2026-03-07T20:23:20.529+07:00  INFO 33332 --- [ecosolution] [           main] o.s.ecosolution.EcosolutionApplication   : Starting EcosolutionApplication using Java 23.0.1 with PID 33332 (D:\FPT\SWP391\Project\SWP391-GR4-EcoSolution-HaiPT2002\target\classes started by PC in D:\FPT\SWP391\Project\SWP391-GR4-EcoSolution-HaiPT2002)
+2026-03-07T20:23:20.531+07:00  INFO 33332 --- [ecosolution] [           main] o.s.ecosolution.EcosolutionApplication   : No active profile set, falling back to 1 default profile: "default"
+2026-03-07T20:23:21.350+07:00  INFO 33332 --- [ecosolution] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-03-07T20:23:21.456+07:00  INFO 33332 --- [ecosolution] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 96 ms. Found 12 JPA repository interfaces.
+2026-03-07T20:23:21.938+07:00  INFO 33332 --- [ecosolution] [           main] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 8080 (http)
+2026-03-07T20:23:21.950+07:00  INFO 33332 --- [ecosolution] [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-03-07T20:23:21.951+07:00  INFO 33332 --- [ecosolution] [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.15]
+2026-03-07T20:23:22.016+07:00  INFO 33332 --- [ecosolution] [           main] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 1425 ms
+2026-03-07T20:23:22.202+07:00  INFO 33332 --- [ecosolution] [           main] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-03-07T20:23:22.248+07:00  INFO 33332 --- [ecosolution] [           main] org.hibernate.orm.core                   : HHH000001: Hibernate ORM core version 7.2.1.Final
+2026-03-07T20:23:22.640+07:00  INFO 33332 --- [ecosolution] [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-03-07T20:23:22.671+07:00  INFO 33332 --- [ecosolution] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-03-07T20:23:22.806+07:00  INFO 33332 --- [ecosolution] [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:ecosolution user=SA
+2026-03-07T20:23:22.807+07:00  INFO 33332 --- [ecosolution] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-03-07T20:23:22.826+07:00  WARN 33332 --- [ecosolution] [           main] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-03-07T20:23:22.845+07:00  INFO 33332 --- [ecosolution] [           main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [jdbc:h2:mem:ecosolution]
+	Database driver: H2 JDBC Driver
+	Database dialect: H2Dialect
+	Database version: 2.4.240
+	Default catalog/schema: ECOSOLUTION/PUBLIC
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: 100
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-03-07T20:23:23.658+07:00  INFO 33332 --- [ecosolution] [           main] org.hibernate.orm.core                   : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+Hibernate: drop table if exists collecting_task cascade 
+Hibernate: drop table if exists collector_score cascade 
+Hibernate: drop table if exists collector_status_history cascade 
+Hibernate: drop table if exists complaint cascade 
+Hibernate: drop table if exists complaint_resolution cascade 
+Hibernate: drop table if exists fraud_signal cascade 
+Hibernate: drop table if exists report_status_history cascade 
+Hibernate: drop table if exists user_auth cascade 
+Hibernate: drop table if exists users cascade 
+Hibernate: drop table if exists waste_report cascade 
+Hibernate: drop table if exists waste_report_image cascade 
+Hibernate: create table collecting_task (assigned_at timestamp(6) not null, completed_at timestamp(6), started_at timestamp(6), collector_id uuid not null, id uuid not null, report_id uuid not null, current_status enum ('ACCEPTED','ASSIGNED','CANCELLED','COMPLETED','IN_PROGRESS') not null, primary key (id))
+Hibernate: create table collector_score (complaint_rate numeric(5,2) not null, completion_rate numeric(5,2) not null, reliability_score numeric(5,2) not null, response_rate numeric(5,2) not null, updated_at timestamp(6) not null, collector_id uuid not null, primary key (collector_id))
+Hibernate: create table collector_status_history (changed_at timestamp(6) not null, collector_id uuid not null, id uuid not null, reason TEXT, status_from enum ('ACCEPTED','ASSIGNED','CANCELLED','COMPLETED','IN_PROGRESS') not null, status_to enum ('ACCEPTED','ASSIGNED','CANCELLED','COMPLETED','IN_PROGRESS') not null, primary key (id))
+Hibernate: create table complaint (created_at timestamp(6) not null, resolved_at timestamp(6), citizen_id uuid not null, id uuid not null, report_id uuid not null, description TEXT not null, status enum ('IN_REVIEW','OPEN','REJECTED','RESOLVED') not null, type enum ('DAMAGED_PROPERTY','NOT_COLLECTED','OTHER','RUDE_COLLECTOR','WRONG_WEIGHT') not null, primary key (id))
+Hibernate: create table complaint_resolution (created_at timestamp(6) not null, admin_id uuid not null, complaint_id uuid not null unique, id uuid not null, note TEXT, result enum ('APPROVED','COMPENSATED','ESCALATED','REJECTED') not null, primary key (id))
+Hibernate: create table fraud_signal (score integer not null, created_at timestamp(6) not null, citizen_id uuid not null, id uuid not null, report_id uuid not null, type enum ('DUPLICATE_REPORT','FALSE_LOCATION','OTHER','SUSPICIOUS_PATTERN','WEIGHT_MANIPULATION') not null, primary key (id))
+Hibernate: create table report_status_history (changed_at timestamp(6) not null, changed_by uuid not null, id uuid not null, report_id uuid not null, reason TEXT, status_from enum ('ASSIGNED','CANCELLED','COMPLETED','IN_PROGRESS','PENDING','VERIFIED') not null, status_to enum ('ASSIGNED','CANCELLED','COMPLETED','IN_PROGRESS','PENDING','VERIFIED') not null, primary key (id))
+Hibernate: create table user_auth (created_at timestamp(6) not null, user_id uuid not null, google_id varchar(255), password_hash varchar(255) not null, username varchar(255) not null, primary key (user_id))
+Hibernate: create table users (created_at timestamp(6) not null, id uuid not null, email varchar(255) not null unique, name varchar(255) not null, role enum ('ASSIGNOR','CITIZEN','COLLECTOR','ENTERPRISE_ADMIN','SYSTEM_ADMIN') not null, status enum ('ACTIVE','BANNED') not null, primary key (id))
+Hibernate: create table waste_report (declared_weight numeric(10,2) not null, latitude numeric(10,6) not null, longitude numeric(10,6) not null, verified_weight numeric(10,2), created_at timestamp(6) not null, sla_deadline_at timestamp(6), citizen_id uuid not null, id uuid not null, description TEXT not null, cancel_reason_code enum ('ALREADY_COLLECTED','DUPLICATE','FALSE_REPORT','INVALID_LOCATION','OTHER'), current_status enum ('ASSIGNED','CANCELLED','COMPLETED','IN_PROGRESS','PENDING','VERIFIED') not null, primary key (id))
+Hibernate: create table waste_report_image (created_at timestamp(6) not null, id uuid not null, report_id uuid not null, image_url varchar(255) not null, primary key (id))
+Hibernate: alter table if exists collecting_task add constraint FK2qw3a5agfkaitrddbm8oi1v0t foreign key (collector_id) references users
+Hibernate: alter table if exists collecting_task add constraint FKji7dadtv0pwsj652k2gpw6yda foreign key (report_id) references waste_report
+Hibernate: alter table if exists collector_score add constraint FKhjyelha7ifvpi4jr8h04vjtyn foreign key (collector_id) references users
+Hibernate: alter table if exists collector_status_history add constraint FK4y8dln1pa5882qumx9v896aj9 foreign key (collector_id) references users
+Hibernate: alter table if exists complaint add constraint FKimnk5tgej6493mie74wphas9j foreign key (citizen_id) references users
+Hibernate: alter table if exists complaint add constraint FK4163a0rgyfu8hdxoqth76kufo foreign key (report_id) references waste_report
+Hibernate: alter table if exists complaint_resolution add constraint FKdr7u0x8lie3q4dq0nj8xgfmj3 foreign key (admin_id) references users
+Hibernate: alter table if exists complaint_resolution add constraint FKi7eu23oupcv93yfpvjgkvtx2g foreign key (complaint_id) references complaint
+Hibernate: alter table if exists fraud_signal add constraint FKtpe6kwe0e63u8pcx9ykpyib8x foreign key (citizen_id) references users
+Hibernate: alter table if exists fraud_signal add constraint FKdl4r5s4pddre3ej3d9yjph8u foreign key (report_id) references waste_report
+Hibernate: alter table if exists report_status_history add constraint FK17yef48ah6955d7vm594st7ap foreign key (changed_by) references users
+Hibernate: alter table if exists report_status_history add constraint FK5t1ah7r4x8q5h3uf1plc3iffg foreign key (report_id) references waste_report
+Hibernate: alter table if exists user_auth add constraint FK9hog4tmdalcddidanohglx6gl foreign key (user_id) references users
+Hibernate: alter table if exists waste_report add constraint FKipakhg8hqyb8c1q9kff6fg6me foreign key (citizen_id) references users
+Hibernate: alter table if exists waste_report_image add constraint FK42ctx0qdosj0lfm1cc0316gdp foreign key (report_id) references waste_report
+2026-03-07T20:23:23.735+07:00  INFO 33332 --- [ecosolution] [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-03-07T20:23:23.832+07:00  INFO 33332 --- [ecosolution] [           main] o.s.d.j.r.query.QueryEnhancerFactories   : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-03-07T20:23:24.997+07:00  WARN 33332 --- [ecosolution] [           main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-03-07T20:23:25.500+07:00  INFO 33332 --- [ecosolution] [           main] o.s.b.h.a.H2ConsoleAutoConfiguration     : H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:ecosolution'
+2026-03-07T20:23:25.573+07:00  INFO 33332 --- [ecosolution] [           main] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 8080 (http) with context path '/'
+2026-03-07T20:23:25.578+07:00  INFO 33332 --- [ecosolution] [           main] o.s.ecosolution.EcosolutionApplication   : Started EcosolutionApplication in 5.395 seconds (process running for 5.79)
+Hibernate: select count(*) from users u1_0
+2026-03-07T20:23:25.644+07:00  INFO 33332 --- [ecosolution] [           main] o.s.e.common.config.DataInitializer      : Initializing database with sample data...
+Hibernate: insert into users (created_at,email,name,role,status,id) values (?,?,?,?,?,?)
+Hibernate: insert into user_auth (created_at,google_id,password_hash,username,user_id) values (?,?,?,?,?)
+2026-03-07T20:23:25.745+07:00  INFO 33332 --- [ecosolution] [           main] o.s.e.common.config.DataInitializer      : ? Created SYSTEM_ADMIN: System Administrator (admin@ecosolution.com)
+Hibernate: insert into users (created_at,email,name,role,status,id) values (?,?,?,?,?,?)
+Hibernate: insert into user_auth (created_at,google_id,password_hash,username,user_id) values (?,?,?,?,?)
+2026-03-07T20:23:25.810+07:00  INFO 33332 --- [ecosolution] [           main] o.s.e.common.config.DataInitializer      : ? Created ENTERPRISE_ADMIN: Enterprise Admin 1 (enterprise_admin1@ecosolution.com)
+Hibernate: insert into users (created_at,email,name,role,status,id) values (?,?,?,?,?,?)
+Hibernate: insert into user_auth (created_at,google_id,password_hash,username,user_id) values (?,?,?,?,?)
+2026-03-07T20:23:25.873+07:00  INFO 33332 --- [ecosolution] [           main] o.s.e.common.config.DataInitializer      : ? Created ENTERPRISE_ADMIN: Enterprise Admin 2 (enterprise_admin2@ecosolution.com)
+Hibernate: insert into users (created_at,email,name,role,status,id) values (?,?,?,?,?,?)
+Hibernate: insert into user_auth (created_at,google_id,password_hash,username,user_id) values (?,?,?,?,?)
+2026-03-07T20:23:25.939+07:00  INFO 33332 --- [ecosolution] [           main] o.s.e.common.config.DataInitializer      : ? Created ASSIGNOR: Task Assignor 1 (assignor1@ecosolution.com)
+Hibernate: insert into users (created_at,email,name,role,status,id) values (?,?,?,?,?,?)
+Hibernate: insert into user_auth (created_at,google_id,password_hash,username,user_id) values (?,?,?,?,?)
+2026-03-07T20:23:26.003+07:00  INFO 33332 --- [ecosolution] [           main] o.s.e.common.config.DataInitializer      : ? Created ASSIGNOR: Task Assignor 2 (assignor2@ecosolution.com)
+Hibernate: insert into users (created_at,email,name,role,status,id) values (?,?,?,?,?,?)
+Hibernate: insert into user_auth (created_at,google_id,password_hash,username,user_id) values (?,?,?,?,?)
+2026-03-07T20:23:26.067+07:00  INFO 33332 --- [ecosolution] [           main] o.s.e.common.config.DataInitializer      : ? Created COLLECTOR: John Collector (collector1@ecosolution.com)
+Hibernate: insert into users (created_at,email,name,role,status,id) values (?,?,?,?,?,?)
+Hibernate: insert into user_auth (created_at,google_id,password_hash,username,user_id) values (?,?,?,?,?)
+2026-03-07T20:23:26.130+07:00  INFO 33332 --- [ecosolution] [           main] o.s.e.common.config.DataInitializer      : ? Created COLLECTOR: Alice Walker (collector2@ecosolution.com)
+Hibernate: insert into users (created_at,email,name,role,status,id) values (?,?,?,?,?,?)
+Hibernate: insert into user_auth (created_at,google_id,password_hash,username,user_id) values (?,?,?,?,?)
+2026-03-07T20:23:26.194+07:00  INFO 33332 --- [ecosolution] [           main] o.s.e.common.config.DataInitializer      : ? Created COLLECTOR: Bob Smith (collector3@ecosolution.com)
+Hibernate: insert into users (created_at,email,name,role,status,id) values (?,?,?,?,?,?)
+Hibernate: insert into user_auth (created_at,google_id,password_hash,username,user_id) values (?,?,?,?,?)
+2026-03-07T20:23:26.258+07:00  INFO 33332 --- [ecosolution] [           main] o.s.e.common.config.DataInitializer      : ? Created COLLECTOR: Carol Johnson (collector4@ecosolution.com)
+Hibernate: insert into users (created_at,email,name,role,status,id) values (?,?,?,?,?,?)
+Hibernate: insert into user_auth (created_at,google_id,password_hash,username,user_id) values (?,?,?,?,?)
+2026-03-07T20:23:26.324+07:00  INFO 33332 --- [ecosolution] [           main] o.s.e.common.config.DataInitializer      : ? Created COLLECTOR: David Lee (collector5@ecosolution.com)
+Hibernate: insert into users (created_at,email,name,role,status,id) values (?,?,?,?,?,?)
+Hibernate: insert into user_auth (created_at,google_id,password_hash,username,user_id) values (?,?,?,?,?)
+2026-03-07T20:23:26.388+07:00  INFO 33332 --- [ecosolution] [           main] o.s.e.common.config.DataInitializer      : ? Created COLLECTOR: Emma Wilson (collector6@ecosolution.com)
+Hibernate: insert into users (created_at,email,name,role,status,id) values (?,?,?,?,?,?)
+Hibernate: insert into user_auth (created_at,google_id,password_hash,username,user_id) values (?,?,?,?,?)
+2026-03-07T20:23:26.452+07:00  INFO 33332 --- [ecosolution] [           main] o.s.e.common.config.DataInitializer      : ? Created COLLECTOR: Frank Brown (collector7@ecosolution.com)
+Hibernate: insert into users (created_at,email,name,role,status,id) values (?,?,?,?,?,?)
+Hibernate: insert into user_auth (created_at,google_id,password_hash,username,user_id) values (?,?,?,?,?)
+2026-03-07T20:23:26.515+07:00  INFO 33332 --- [ecosolution] [           main] o.s.e.common.config.DataInitializer      : ? Created COLLECTOR: Grace Davis (collector8@ecosolution.com)
+2026-03-07T20:23:26.516+07:00  INFO 33332 --- [ecosolution] [           main] o.s.e.common.config.DataInitializer      : 
+Creating collector scores...
+Hibernate: insert into collector_score (complaint_rate,completion_rate,reliability_score,response_rate,updated_at,collector_id) values (?,?,?,?,?,?)
+2026-03-07T20:23:26.518+07:00  INFO 33332 --- [ecosolution] [           main] o.s.e.common.config.DataInitializer      :   ? Score created for John Collector - Reliability: 93.27
+Hibernate: insert into collector_score (complaint_rate,completion_rate,reliability_score,response_rate,updated_at,collector_id) values (?,?,?,?,?,?)
+2026-03-07T20:23:26.520+07:00  INFO 33332 --- [ecosolution] [           main] o.s.e.common.config.DataInitializer      :   ? Score created for Alice Walker - Reliability: 86.1
+Hibernate: insert into collector_score (complaint_rate,completion_rate,reliability_score,response_rate,updated_at,collector_id) values (?,?,?,?,?,?)
+2026-03-07T20:23:26.521+07:00  INFO 33332 --- [ecosolution] [           main] o.s.e.common.config.DataInitializer      :   ? Score created for Bob Smith - Reliability: 90.9
+Hibernate: insert into collector_score (complaint_rate,completion_rate,reliability_score,response_rate,updated_at,collector_id) values (?,?,?,?,?,?)
+2026-03-07T20:23:26.521+07:00  INFO 33332 --- [ecosolution] [           main] o.s.e.common.config.DataInitializer      :   ? Score created for Carol Johnson - Reliability: 83.05
+Hibernate: insert into collector_score (complaint_rate,completion_rate,reliability_score,response_rate,updated_at,collector_id) values (?,?,?,?,?,?)
+2026-03-07T20:23:26.523+07:00  INFO 33332 --- [ecosolution] [           main] o.s.e.common.config.DataInitializer      :   ? Score created for David Lee - Reliability: 96.25
+Hibernate: insert into collector_score (complaint_rate,completion_rate,reliability_score,response_rate,updated_at,collector_id) values (?,?,?,?,?,?)
+2026-03-07T20:23:26.524+07:00  INFO 33332 --- [ecosolution] [           main] o.s.e.common.config.DataInitializer      :   ? Score created for Emma Wilson - Reliability: 89.25
+Hibernate: insert into collector_score (complaint_rate,completion_rate,reliability_score,response_rate,updated_at,collector_id) values (?,?,?,?,?,?)
+2026-03-07T20:23:26.525+07:00  INFO 33332 --- [ecosolution] [           main] o.s.e.common.config.DataInitializer      :   ? Score created for Frank Brown - Reliability: 84.65
+Hibernate: insert into collector_score (complaint_rate,completion_rate,reliability_score,response_rate,updated_at,collector_id) values (?,?,?,?,?,?)
+2026-03-07T20:23:26.526+07:00  INFO 33332 --- [ecosolution] [           main] o.s.e.common.config.DataInitializer      :   ? Score created for Grace Davis - Reliability: 92.05
+2026-03-07T20:23:26.526+07:00  INFO 33332 --- [ecosolution] [           main] o.s.e.common.config.DataInitializer      : 
+Creating collector status histories...
+Hibernate: insert into collector_status_history (changed_at,collector_id,reason,status_from,status_to,id) values (?,?,?,?,?,?)
+2026-03-07T20:23:26.527+07:00  INFO 33332 --- [ecosolution] [           main] o.s.e.common.config.DataInitializer      :   ? Status history created for John Collector: ASSIGNED ? ACCEPTED
+Hibernate: insert into collector_status_history (changed_at,collector_id,reason,status_from,status_to,id) values (?,?,?,?,?,?)
+2026-03-07T20:23:26.528+07:00  INFO 33332 --- [ecosolution] [           main] o.s.e.common.config.DataInitializer      :   ? Status history created for Alice Walker: ACCEPTED ? IN_PROGRESS
+Hibernate: insert into collector_status_history (changed_at,collector_id,reason,status_from,status_to,id) values (?,?,?,?,?,?)
+2026-03-07T20:23:26.529+07:00  INFO 33332 --- [ecosolution] [           main] o.s.e.common.config.DataInitializer      :   ? Status history created for Bob Smith: IN_PROGRESS ? COMPLETED
+Hibernate: insert into collector_status_history (changed_at,collector_id,reason,status_from,status_to,id) values (?,?,?,?,?,?)
+2026-03-07T20:23:26.530+07:00  INFO 33332 --- [ecosolution] [           main] o.s.e.common.config.DataInitializer      :   ? Status history created for Carol Johnson: ASSIGNED ? CANCELLED
+Hibernate: insert into collector_status_history (changed_at,collector_id,reason,status_from,status_to,id) values (?,?,?,?,?,?)
+2026-03-07T20:23:26.530+07:00  INFO 33332 --- [ecosolution] [           main] o.s.e.common.config.DataInitializer      :   ? Status history created for David Lee: ASSIGNED ? ACCEPTED
+Hibernate: insert into collector_status_history (changed_at,collector_id,reason,status_from,status_to,id) values (?,?,?,?,?,?)
+2026-03-07T20:23:26.531+07:00  INFO 33332 --- [ecosolution] [           main] o.s.e.common.config.DataInitializer      :   ? Status history created for Emma Wilson: ACCEPTED ? IN_PROGRESS
+Hibernate: insert into collector_status_history (changed_at,collector_id,reason,status_from,status_to,id) values (?,?,?,?,?,?)
+2026-03-07T20:23:26.532+07:00  INFO 33332 --- [ecosolution] [           main] o.s.e.common.config.DataInitializer      :   ? Status history created for Frank Brown: ASSIGNED ? ACCEPTED
+Hibernate: insert into collector_status_history (changed_at,collector_id,reason,status_from,status_to,id) values (?,?,?,?,?,?)
+2026-03-07T20:23:26.533+07:00  INFO 33332 --- [ecosolution] [           main] o.s.e.common.config.DataInitializer      :   ? Status history created for Grace Davis: ACCEPTED ? IN_PROGRESS
+2026-03-07T20:23:26.533+07:00  INFO 33332 --- [ecosolution] [           main] o.s.e.common.config.DataInitializer      : 
+Creating citizen users...
+Hibernate: insert into users (created_at,email,name,role,status,id) values (?,?,?,?,?,?)
+Hibernate: insert into user_auth (created_at,google_id,password_hash,username,user_id) values (?,?,?,?,?)
+2026-03-07T20:23:26.598+07:00  INFO 33332 --- [ecosolution] [           main] o.s.e.common.config.DataInitializer      : ? Created CITIZEN: Maria García (citizen1@ecosolution.com)
+Hibernate: insert into users (created_at,email,name,role,status,id) values (?,?,?,?,?,?)
+Hibernate: insert into user_auth (created_at,google_id,password_hash,username,user_id) values (?,?,?,?,?)
+2026-03-07T20:23:26.662+07:00  INFO 33332 --- [ecosolution] [           main] o.s.e.common.config.DataInitializer      : ? Created CITIZEN: Chen Wei (citizen2@ecosolution.com)
+Hibernate: insert into users (created_at,email,name,role,status,id) values (?,?,?,?,?,?)
+Hibernate: insert into user_auth (created_at,google_id,password_hash,username,user_id) values (?,?,?,?,?)
+2026-03-07T20:23:26.725+07:00  INFO 33332 --- [ecosolution] [           main] o.s.e.common.config.DataInitializer      : ? Created CITIZEN: Priya Patel (citizen3@ecosolution.com)
+Hibernate: insert into users (created_at,email,name,role,status,id) values (?,?,?,?,?,?)
+Hibernate: insert into user_auth (created_at,google_id,password_hash,username,user_id) values (?,?,?,?,?)
+2026-03-07T20:23:26.788+07:00  INFO 33332 --- [ecosolution] [           main] o.s.e.common.config.DataInitializer      : ? Created CITIZEN: Johann Mueller (citizen4@ecosolution.com)
+Hibernate: insert into users (created_at,email,name,role,status,id) values (?,?,?,?,?,?)
+Hibernate: insert into user_auth (created_at,google_id,password_hash,username,user_id) values (?,?,?,?,?)
+2026-03-07T20:23:26.852+07:00  INFO 33332 --- [ecosolution] [           main] o.s.e.common.config.DataInitializer      : ? Created CITIZEN: Sofia Rossi (citizen5@ecosolution.com)
+2026-03-07T20:23:26.852+07:00  INFO 33332 --- [ecosolution] [           main] o.s.e.common.config.DataInitializer      : 
+========================================
+2026-03-07T20:23:26.852+07:00  INFO 33332 --- [ecosolution] [           main] o.s.e.common.config.DataInitializer      : ? Database initialization completed successfully!
+2026-03-07T20:23:26.852+07:00  INFO 33332 --- [ecosolution] [           main] o.s.e.common.config.DataInitializer      : ========================================
+2026-03-07T20:23:26.852+07:00  INFO 33332 --- [ecosolution] [           main] o.s.e.common.config.DataInitializer      : 
+Test Credentials:
+2026-03-07T20:23:26.852+07:00  INFO 33332 --- [ecosolution] [           main] o.s.e.common.config.DataInitializer      :   Admin: admin@ecosolution.com / Admin@123456
+2026-03-07T20:23:26.852+07:00  INFO 33332 --- [ecosolution] [           main] o.s.e.common.config.DataInitializer      :   Enterprise Admin: enterprise_admin1@ecosolution.com / EnterpriseAdmin@123456
+2026-03-07T20:23:26.852+07:00  INFO 33332 --- [ecosolution] [           main] o.s.e.common.config.DataInitializer      :   Assignor: assignor1@ecosolution.com / Assignor@123456
+2026-03-07T20:23:26.852+07:00  INFO 33332 --- [ecosolution] [           main] o.s.e.common.config.DataInitializer      :   Collector: collector1@ecosolution.com / Collector@123456
+2026-03-07T20:23:26.852+07:00  INFO 33332 --- [ecosolution] [           main] o.s.e.common.config.DataInitializer      :   Citizen: citizen1@ecosolution.com / Citizen@123456
+2026-03-07T20:23:26.852+07:00  INFO 33332 --- [ecosolution] [           main] o.s.e.common.config.DataInitializer      : ========================================
+
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  01:31 min
+[INFO] Finished at: 2026-03-07T20:24:48+07:00
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.springframework.boot:spring-boot-maven-plugin:4.0.2:run (default-cli) on project ecosolution: Process terminated with exit code: 1 -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoExecutionException
