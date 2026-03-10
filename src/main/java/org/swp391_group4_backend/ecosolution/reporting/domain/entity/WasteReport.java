@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 
 import org.swp391_group4_backend.ecosolution.core.domain.entity.User;
 import org.swp391_group4_backend.ecosolution.reporting.domain.ReportStatus;
+import org.swp391_group4_backend.ecosolution.reporting.domain.WasteType;
 
 import java.util.UUID;
 
@@ -54,7 +55,13 @@ public class WasteReport {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
     // TODO 02b: content fields
+    @Enumerated(EnumType.STRING)
+    private WasteType wasteType;
     private String locationDistrict;
+    @Column(nullable = false)
+    private String address;
+    private String description;
+    @Column(nullable = false)
     private String imagePath;
     private String proofImagePath;
 

@@ -3,6 +3,7 @@ Created: March 10, 2026
 Reference: PROJECT_SPECIFICATION v4.0
 Approach: Pragmatic TDD (Red → Green → Refactor) — Batched
 
+
 ═══════════════════════════════════════════════════════════════
  HOW TO USE THIS DOCUMENT
 ═══════════════════════════════════════════════════════════════

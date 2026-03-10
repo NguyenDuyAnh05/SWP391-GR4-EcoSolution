@@ -1,5 +1,10 @@
 package org.swp391_group4_backend.ecosolution.core.repository;
 
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.swp391_group4_backend.ecosolution.core.domain.entity.User;
+
+import java.util.UUID;
+
 /**
  * TODO 07: Create the UserRepository interface.
  *
@@ -10,7 +15,7 @@ package org.swp391_group4_backend.ecosolution.core.repository;
  * Extends: JpaRepository<User, UUID>
  */
 // TODO 07: Uncomment and complete:
-// public interface UserRepository extends JpaRepository<User, UUID> {
-// }
+ public interface UserRepository extends JpaRepository<User, UUID> {
+ }
 
 

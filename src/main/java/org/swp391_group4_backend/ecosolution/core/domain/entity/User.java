@@ -47,10 +47,28 @@ import java.util.UUID;
 @Entity
 @Table(name = "users")
 public class User {
+
     // TODO 06a: primary key
+    @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private UUID id;
     // TODO 06b: identity fields
+    @Column(unique = true, nullable = false)
+    private String username;
+    @Column(unique = true, nullable = false)
+    private String email;
+    @Column(nullable = false)
+    private String password;
     // TODO 06c: role field
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private UserRole role;
     // TODO 06d: points field
+    @Builder.Default
+    private int points = 0; // Default value for points
     // TODO 06e: employer self-reference
+    @ManyToOne
+    @JoinColumn(name = "employer_id")
+    private User employer;
 }
 

@@ -6,6 +6,9 @@ import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.stereotype.Service;
+import org.swp391_group4_backend.ecosolution.core.domain.UserRole;
+import org.swp391_group4_backend.ecosolution.core.domain.entity.User;
+import org.swp391_group4_backend.ecosolution.core.repository.UserRepository;
 import org.swp391_group4_backend.ecosolution.reporting.domain.ReportStatus;
 import org.swp391_group4_backend.ecosolution.reporting.domain.entity.WasteReport;
 import org.swp391_group4_backend.ecosolution.reporting.repository.WasteReportRepository;
@@ -41,11 +44,15 @@ public class ReportServiceImpl implements ReportService {
             ReportStatus.PENDING, ReportStatus.ACCEPTED,
             ReportStatus.ACCEPTED, ReportStatus.ASSIGNED,
             ReportStatus.ASSIGNED, ReportStatus.COLLECTED); //Collected is the terminal state, so it is not a key in the map.
+
     // TODO 05b: Inject WasteReportRepository via constructor.
     private final WasteReportRepository reportRepository;
+    // TODO 10a: Inject UserRepository (needed for claim/assign to look up users)
+    private final UserRepository userRepository;
 
-    public ReportServiceImpl(WasteReportRepository reportRepository) {
+    public ReportServiceImpl(WasteReportRepository reportRepository, UserRepository userRepository) {
         this.reportRepository = reportRepository;
+        this.userRepository = userRepository;
     }
     // TODO 05c: Implement transitionStatus(UUID reportId, ReportStatus newStatus)
     //
@@ -86,5 +93,71 @@ public class ReportServiceImpl implements ReportService {
         report.setStatus(newStatus);
         reportRepository.save(report);
     }
+
+    // TODO 10b: Implement claimReport(UUID reportId, UUID enterpriseUserId)
+    //
+    // **CURRENT** ← You are here
+    //
+    // Business Rule BR-02:
+    //   Step 1: Find report by ID. Throw if not found.
+    //   Step 2: Find user by enterpriseUserId. Throw if not found.
+    //   Step 3: Check user.getRole() == UserRole.ENTERPRISE.
+    //           If not → throw IllegalStateException("Only ENTERPRISE can claim reports")
+    //   Step 4: Check report.getStatus() == ReportStatus.PENDING.
+    //           If not → throw IllegalStateException("Can only claim PENDING reports")
+    //   Step 5: Set report.setAcceptedBy(enterprise user)
+    //   Step 6: Set report.setStatus(ReportStatus.ACCEPTED)
+    //   Step 7: Save report.
+
+    //Enterprise receive report from citizen
+    @Override
+    public void claimReport(UUID reportId, UUID enterpriseUserId) {
+        // TODO 10b: Implement here
+        WasteReport reportFoundByReportId = reportRepository.findById(reportId).orElseThrow(() -> new IllegalArgumentException("Report not found"));
+        User userFoundByEnterpriseId = userRepository.findById(enterpriseUserId).orElseThrow(() -> new IllegalArgumentException("Enterprise user not found"));
+
+        if (userFoundByEnterpriseId.getRole() != UserRole.ENTERPRISE) {
+            throw new IllegalStateException("Only ENTERPRISE can claim reports");
+        }
+        if (reportFoundByReportId.getStatus() != ReportStatus.PENDING) {
+            throw new IllegalStateException("Can only claim PENDING reports");
+        }
+        reportFoundByReportId.setAcceptedBy(userFoundByEnterpriseId);
+        reportFoundByReportId.setStatus(ReportStatus.ACCEPTED);
+        reportRepository.save(reportFoundByReportId);
+
+    }
+
+
+    // TODO 10c: Implement assignCollector(UUID reportId, UUID enterpriseUserId, UUID collectorUserId)
+    //
+    // Business Rule BR-03:
+    //   Step 1: Find report by ID. Throw if not found.
+    //   Step 2: Check report.getStatus() == ReportStatus.ACCEPTED.
+    //           If not → throw IllegalStateException("Can only assign to ACCEPTED reports")
+    //   Step 3: Find collector by collectorUserId. Throw if not found.
+    //   Step 4: Check collector.getEmployer() != null
+    //           AND collector.getEmployer().getId().equals(enterpriseUserId).
+    //           If not → throw IllegalStateException("Collector does not belong to this enterprise")
+    //   Step 5: Set report.setCollectedBy(collector)
+    //   Step 6: Set report.setStatus(ReportStatus.ASSIGNED)
+    //   Step 7: Save report.
+    @Override
+    public void assignCollector(UUID reportId, UUID enterpriseUserId, UUID collectorUserId) {
+        // TODO 10c: Implement here
+        WasteReport reportFoundById = reportRepository.findById(reportId).orElseThrow(() -> new IllegalArgumentException("Report not found"));
+        if(ReportStatus.ACCEPTED != reportFoundById.getStatus()  ) {
+            throw new IllegalStateException("Can only assign to ACCEPTED reports");
+        }
+        User foundCollector = userRepository.findById(collectorUserId).orElseThrow(() -> new IllegalArgumentException("Collector not found"));
+        if(foundCollector.getEmployer() == null || !foundCollector.getEmployer().getId().equals(enterpriseUserId)) {
+            throw new IllegalStateException("Collector does not belong to this enterprise");
+        }
+
+        reportFoundById.setCollectedBy(foundCollector);
+        reportFoundById.setStatus(ReportStatus.ASSIGNED);
+        reportRepository.save(reportFoundById);
+    }
 }
+
 
