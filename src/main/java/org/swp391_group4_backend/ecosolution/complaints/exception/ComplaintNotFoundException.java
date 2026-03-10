@@ -1,0 +1,10 @@
+package org.swp391_group4_backend.ecosolution.complaints.exception;
+
+import java.util.UUID;
+
+public class ComplaintNotFoundException extends RuntimeException {
+    public ComplaintNotFoundException(UUID id) {
+        super("Complaint not found with ID: " + id);
+    }
+}
+

@@ -13,7 +13,7 @@ import org.swp391_group4_backend.ecosolution.auth.exception.UsernameAlreadyExist
 import org.swp391_group4_backend.ecosolution.collectors.exception.CollectorNotFoundException;
 import org.swp391_group4_backend.ecosolution.common.domain.dto.response.ErrorResponseDto;
 import org.swp391_group4_backend.ecosolution.complaints.exception.ComplaintNotFoundException;
-import org.swp391_group4_backend.ecosolution.complaints.exception.ComplaintResolutionException;
+import org.swp391_group4_backend.ecosolution.complaints.exception.ComplaintResolutionNotFoundException;
 import org.swp391_group4_backend.ecosolution.fraud.exception.FraudSignalNotFoundException;
 import org.swp391_group4_backend.ecosolution.reports.exception.ReportStatusHistoryNotFoundException;
 import org.swp391_group4_backend.ecosolution.reports.exception.WasteReportImageNotFoundException;
