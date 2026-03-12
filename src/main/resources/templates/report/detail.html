@@ -1,0 +1,10 @@
+<div th:fragment="body">
+    <h1>Report Detail</h1>
+    <dl class="row">
+        <dt class="col-sm-2">ID</dt><dd class="col-sm-10" th:text="${report.id}"></dd>
+        <dt class="col-sm-2">Address</dt><dd class="col-sm-10" th:text="${report.address}"></dd>
+        <dt class="col-sm-2">Status</dt><dd class="col-sm-10" th:text="${report.status}"></dd>
+        <dt class="col-sm-2">Description</dt><dd class="col-sm-10" th:text="${report.description}"></dd>
+    </dl>
+</div>
+
