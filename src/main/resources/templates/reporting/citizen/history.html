@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>My Reports</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>.muted { opacity: 0.65; }</style>
+</head>
+<body>
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center">
+        <h1>My Reports</h1>
+        <div>
+            <a class="btn btn-secondary me-2" th:href="@{/citizen/dashboard}">Dashboard</a>
+            <a class="btn btn-primary" th:href="@{/citizen/report/new}">Report New Waste</a>
+        </div>
+    </div>
+
+    <div th:if="${message}" class="alert alert-success mt-3" th:text="${message}"></div>
+    <div th:if="${error}" class="alert alert-danger mt-3" th:text="${error}"></div>
+
+    <table class="table table-striped mt-3">
+        <thead>
+        <tr>
+            <th>Submitted At</th>
+            <th>Address</th>
+            <th>Ward</th>
+            <th>Quantity (kg)</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="r : ${reports}" th:classappend="${r.status.name() == 'CANCELLED' || r.status.name() == 'COLLECTED'} ? 'text-muted'">
+            <td th:text="${#temporals.format(r.createdAt, 'yyyy-MM-dd HH:mm:ss')}"></td>
+            <td th:text="${r.address}"></td>
+            <td th:text="${r.ward != null} ? ${r.ward.name} : 'N/A'"></td>
+            <td th:text="${r.quantity}"></td>
+            <td th:text="${r.status}"></td>
+            <td>
+                <form th:action="@{'/citizen/report/' + ${r.id} + '/cancel'}" method="post" th:if="${r.status.name() == 'PENDING'}" style="display:inline">
+                    <button class="btn btn-sm btn-danger" type="submit" onclick="return confirm('Cancel this report?')">Cancel</button>
+                </form>
+                <a class="btn btn-sm btn-outline-secondary" th:href="@{'/citizen/report?view=' + ${r.id}}">View</a>
+            </td>
+        </tr>
+        <tr th:if="${#lists.isEmpty(reports)}">
+            <td colspan="6">You have not submitted any reports yet.</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
+

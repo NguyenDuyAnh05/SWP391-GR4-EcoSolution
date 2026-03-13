@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Citizen Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container mt-4">
+    <h1>Citizen Dashboard</h1>
+
+    <div th:if="${message}" class="alert alert-success" th:text="${message}"></div>
+    <div th:if="${error}" class="alert alert-danger" th:text="${error}"></div>
+
+    <div class="card mt-3">
+        <div class="card-body">
+            <h5 class="card-title">Your Points</h5>
+            <p class="card-text display-6" th:text="${points}">0</p>
+            <a class="btn btn-primary me-2" th:href="@{/citizen/report/new}">Report New Waste</a>
+            <a class="btn btn-outline-secondary" th:href="@{/citizen/reports}">View My History</a>
+        </div>
+    </div>
+</div>
+</body>
+</html>
