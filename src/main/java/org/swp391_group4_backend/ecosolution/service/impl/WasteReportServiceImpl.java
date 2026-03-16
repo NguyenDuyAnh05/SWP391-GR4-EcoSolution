@@ -16,7 +16,6 @@ import org.swp391_group4_backend.ecosolution.repository.WasteReportRepository;
 import org.swp391_group4_backend.ecosolution.service.WasteReportService;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class WasteReportServiceImpl implements WasteReportService {
@@ -65,7 +64,7 @@ public class WasteReportServiceImpl implements WasteReportService {
 
     @Override
     public List<WasteReport> getPendingReports() {
-        return List.of();
+        return reportRepository.findByReportStatus(ReportStatus.PENDING);
     }
 
     @Override
@@ -85,7 +84,7 @@ public class WasteReportServiceImpl implements WasteReportService {
 
     @Override
     public List<WasteReport> getTasksForCollector(Long collectorId) {
-        return List.of();
+        return reportRepository.findByCollectorId(collectorId);
     }
 
 
