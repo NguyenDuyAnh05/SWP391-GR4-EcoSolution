@@ -14,6 +14,7 @@ import org.swp391_group4_backend.ecosolution.service.WasteReportService;
 
 import java.util.List;
 
+@RestController
 @RequestMapping("/api/v1/reports")
 public class WasteReportController {
     private final WasteReportService reportService;

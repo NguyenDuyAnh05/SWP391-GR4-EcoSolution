@@ -10,6 +10,9 @@ public record CreateReportRequest(
         @Size(max = 500, message = "Description must be under 500 characters")
         String description,
 
+        @NotBlank(message = "Location address is required")
+        String locationAddress,
+
         @NotBlank(message = "Image URL is required")
         String imageUrl,
 

@@ -16,6 +16,7 @@ public class WasteReportMapperImpl implements WasteReportMapper {
         return new ReportResponse(
                 entity.getId(),
                 entity.getDescription(),
+                entity.getLocationAddress(),
                 entity.getImageUrl(),
                 entity.getWasteType(),
                 entity.getReportStatus(),
@@ -34,6 +35,8 @@ public class WasteReportMapperImpl implements WasteReportMapper {
         wasteReport.setDescription(request.description());
         wasteReport.setImageUrl(request.imageUrl());
         wasteReport.setWasteType(request.wasteType());
+        wasteReport.setLocationAddress(request.locationAddress());
+
         // Lưu ý: reportStatus và createdAt đã có @PrePersist lo trong Entity rồi
 
         return wasteReport;

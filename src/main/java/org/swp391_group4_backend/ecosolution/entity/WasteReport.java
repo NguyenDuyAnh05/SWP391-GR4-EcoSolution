@@ -24,6 +24,9 @@ public class WasteReport {
     @Column(name = "description")
     private String description;
 
+    @Column(name = "location_address")
+    private String locationAddress;
+
     @Column(name = "image_url")
     private String imageUrl;
 

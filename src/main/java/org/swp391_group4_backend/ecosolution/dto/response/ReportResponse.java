@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
 public record ReportResponse(
         Long id,
         String description,
+        String locationAddress,
         String imageUrl,
         WasteType wasteType,
         ReportStatus status,
