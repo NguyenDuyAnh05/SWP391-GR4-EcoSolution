@@ -13,6 +13,15 @@ public class WasteReportMapperImpl implements WasteReportMapper {
     public ReportResponse toDto(WasteReport entity) {
         if (entity == null) return null;
 
+        String citizenName = "Unknown";
+        if (entity.getCitizen() != null) {
+            citizenName = entity.getCitizen().getFirstName() + " " + entity.getCitizen().getLastName();
+        }
+        String collectorName = "Unassigned";
+        if (entity.getCollector() != null) {
+            collectorName = entity.getCollector().getUsername();
+        }
+
         return new ReportResponse(
                 entity.getId(),
                 entity.getDescription(),
@@ -21,8 +30,8 @@ public class WasteReportMapperImpl implements WasteReportMapper {
                 entity.getWasteType(),
                 entity.getReportStatus(),
                 entity.getCreatedAt(),
-                entity.getCitizen().getFirstName() + " " + entity.getCitizen().getLastName(),
-                entity.getCollector() != null ? entity.getCollector().getUsername() : "Unassigned"
+                citizenName,
+                collectorName
         );
     }
 
