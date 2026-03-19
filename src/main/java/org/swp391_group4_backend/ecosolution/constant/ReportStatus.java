@@ -4,5 +4,6 @@ public enum ReportStatus {
     PENDING,
     ACCEPTED,
     ASSIGNED,
-    COLLECTED
+    COLLECTED,
+    IN_PROGRESS
 }
