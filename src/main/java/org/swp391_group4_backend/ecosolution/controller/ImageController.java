@@ -1,10 +1,7 @@
 package org.swp391_group4_backend.ecosolution.controller;
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.swp391_group4_backend.ecosolution.service.ImageService;
 
@@ -12,6 +9,7 @@ import java.io.IOException;
 
 @RestController
 @RequestMapping("/api/v1/images")
+@CrossOrigin(origins = {"http://localhost:5173", "http://localhost:5174"}) 
 public class ImageController {
     private final ImageService imageService;
 
