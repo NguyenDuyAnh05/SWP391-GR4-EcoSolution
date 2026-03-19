@@ -21,13 +21,13 @@ public class WasteReport {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "description")
+    @Column(name = "description", columnDefinition = "TEXT")
     private String description;
 
-    @Column(name = "location_address")
+    @Column(name = "location_address", length = 500)
     private String locationAddress;
 
-    @Column(name = "image_url")
+    @Column(name = "image_url", length = 1000)
     private String imageUrl;
 
     @Enumerated(EnumType.STRING)
@@ -43,11 +43,11 @@ public class WasteReport {
         this.createdAt = LocalDateTime.now();
         if (this.reportStatus == null) this.reportStatus = ReportStatus.PENDING;
     }
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "citizen_id")
     private User citizen;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "collector_id")
     private User collector;
 }

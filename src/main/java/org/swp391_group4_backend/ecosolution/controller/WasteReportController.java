@@ -16,6 +16,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/reports")
+@CrossOrigin(origins = "http://localhost:5173")
 public class WasteReportController {
     private final WasteReportService reportService;
     private final WasteReportMapper reportMapper;
@@ -25,14 +26,18 @@ public class WasteReportController {
         this.reportMapper = reportMapper;
     }
     @PostMapping
-    public ResponseEntity<ReportResponse> createReport(@Valid @RequestBody CreateReportRequest request) {
+    public ResponseEntity<ReportResponse> createReport(
+            @Valid @RequestBody CreateReportRequest request
+    ) {
         WasteReport createdReport = reportService.createReport(request);
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(reportMapper.toDto(createdReport));
     }
 
     @GetMapping("/citizen/{citizenId}")
-    public ResponseEntity<List<ReportResponse>> getCitizenHistory(@PathVariable Long citizenId) {
+    public ResponseEntity<List<ReportResponse>> getCitizenHistory(
+            @PathVariable Long citizenId
+    ) {
         List<WasteReport> reports = reportService.getReportsByCitizen(citizenId);
         return ResponseEntity.ok(reportMapper.toDtoList(reports));
     }
@@ -44,24 +49,36 @@ public class WasteReportController {
         return ResponseEntity.ok(reportMapper.toDtoList(reports));
     }
 
+    // --- MANAGER: Assign Collector
+
     @PutMapping("/assign")
-    public ResponseEntity<ReportResponse> assignCollector(@Valid @RequestBody AssignCollectorRequest request) {
+    public ResponseEntity<ReportResponse> assignCollector(
+            @Valid @RequestBody AssignCollectorRequest request
+    ) {
         WasteReport assignedReport = reportService.assignCollector(request);
         return ResponseEntity.ok(reportMapper.toDto(assignedReport));
     }
 
     // --- COLLECTOR: View tasks and update status ---
     @GetMapping("/collector/{collectorId}")
-    public ResponseEntity<List<ReportResponse>> getCollectorTasks(@PathVariable Long collectorId) {
+    public ResponseEntity<List<ReportResponse>> getCollectorTasks(
+            @PathVariable Long collectorId
+    ) {
         List<WasteReport> reports = reportService.getTasksForCollector(collectorId);
         return ResponseEntity.ok(reportMapper.toDtoList(reports));
     }
 
     @PutMapping("/{id}/status")
-    public ResponseEntity<ReportResponse> updateStatus(
+    public ResponseEntity<?> updateStatus(
             @PathVariable Long id,
             @Valid @RequestBody UpdateStatusRequest request) {
-        WasteReport updatedReport = reportService.updateStatus(id, request);
-        return ResponseEntity.ok(reportMapper.toDto(updatedReport));
+        try {
+            WasteReport updatedReport = reportService.updateStatus(id, request);
+            return ResponseEntity.ok(reportMapper.toDto(updatedReport));
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
     }
 }

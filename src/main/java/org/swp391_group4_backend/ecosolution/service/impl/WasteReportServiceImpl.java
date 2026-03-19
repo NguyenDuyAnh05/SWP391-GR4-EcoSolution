@@ -23,7 +23,8 @@ public class WasteReportServiceImpl implements WasteReportService {
     private final WasteReportRepository reportRepository;
     private final WasteReportMapper mapper;
 
-    public WasteReportServiceImpl(UserRepository userRepository, WasteReportRepository reportRepository, WasteReportMapper mapper) {
+    public WasteReportServiceImpl(UserRepository userRepository, WasteReportRepository reportRepository,
+            WasteReportMapper mapper) {
         this.userRepository = userRepository;
         this.reportRepository = reportRepository;
         this.mapper = mapper;
@@ -32,7 +33,8 @@ public class WasteReportServiceImpl implements WasteReportService {
     @Override
     public WasteReport createReport(CreateReportRequest request) {
         Long citizenId = request.citizenId();
-        User citizen = userRepository.findById(citizenId).orElseThrow(() -> new EntityNotFoundException("Citizen not found with id: " + citizenId));
+        User citizen = userRepository.findById(citizenId)
+                .orElseThrow(() -> new EntityNotFoundException("Citizen not found with id: " + citizenId));
         WasteReport report = mapper.toEntity(request);
         report.setCitizen(citizen);
 
@@ -50,7 +52,8 @@ public class WasteReportServiceImpl implements WasteReportService {
                 .orElseThrow(() -> new EntityNotFoundException("Report not found with id: " + request.reportId()));
 
         User collector = userRepository.findById(request.collectorId())
-                .orElseThrow(() -> new EntityNotFoundException("Collector not found with id: " + request.collectorId()));
+                .orElseThrow(
+                        () -> new EntityNotFoundException("Collector not found with id: " + request.collectorId()));
 
         if (collector.getRole() != UserRole.COLLECTOR) {
             throw new IllegalArgumentException("User is not a COLLECTOR");
@@ -72,7 +75,20 @@ public class WasteReportServiceImpl implements WasteReportService {
         WasteReport report = reportRepository.findById(reportId)
                 .orElseThrow(() -> new EntityNotFoundException("Report not found with id: " + reportId));
 
-        report.setReportStatus(request.status());
+        ReportStatus currentStatus = report.getReportStatus();
+        ReportStatus newStatus = request.status();
+
+        if (currentStatus == ReportStatus.ASSIGNED && newStatus != ReportStatus.IN_PROGRESS) {
+            throw new IllegalArgumentException("Status can only be updated to IN_PROGRESS from ASSIGNED.");
+        }
+        if (currentStatus == ReportStatus.IN_PROGRESS && newStatus != ReportStatus.COLLECTED) {
+            throw new IllegalArgumentException("Status can only be updated to COLLECTED from IN_PROGRESS.");
+        }
+        if (currentStatus == ReportStatus.COLLECTED) {
+            throw new IllegalArgumentException("Report is already COLLECTED and cannot be modified.");
+        }
+
+        report.setReportStatus(newStatus);
 
         // Nếu đã thu gom xong và có ảnh minh chứng thì lưu lại
         if (request.status() == ReportStatus.COLLECTED && request.confirmationImageUrl() != null) {
@@ -86,6 +102,5 @@ public class WasteReportServiceImpl implements WasteReportService {
     public List<WasteReport> getTasksForCollector(Long collectorId) {
         return reportRepository.findByCollectorId(collectorId);
     }
-
 
 }
