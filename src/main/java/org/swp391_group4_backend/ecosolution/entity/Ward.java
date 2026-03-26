@@ -2,10 +2,13 @@ package org.swp391_group4_backend.ecosolution.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Table(name = "wards")
-@Data
+@Getter
+@Setter
 public class Ward {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -13,4 +16,8 @@ public class Ward {
 
     @Column(name = "ward_name", nullable = false, unique = true)
     private String wardName;
+
+    @ManyToOne
+    @JoinColumn(name = "collector_id")
+    private User collector;
 }

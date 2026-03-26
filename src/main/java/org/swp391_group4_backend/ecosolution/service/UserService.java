@@ -5,6 +5,7 @@ import org.swp391_group4_backend.ecosolution.dto.request.ActivationRequest;
 import org.swp391_group4_backend.ecosolution.dto.request.LoginRequest;
 import org.swp391_group4_backend.ecosolution.dto.request.RegisterRequest;
 import org.swp391_group4_backend.ecosolution.dto.response.ActivationResponse;
+import org.swp391_group4_backend.ecosolution.dto.response.SubscriptionResponse;
 import org.swp391_group4_backend.ecosolution.dto.response.UserResponse;
 import org.swp391_group4_backend.ecosolution.entity.User;
 
@@ -14,5 +15,6 @@ public interface UserService {
     UserResponse login(LoginRequest request);
     UserResponse register(RegisterRequest request);
     ActivationResponse activateService(ActivationRequest request, HttpServletRequest httpServletRequest);
+    SubscriptionResponse getSubscription(Long userId);
 
 }

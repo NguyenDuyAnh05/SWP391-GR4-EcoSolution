@@ -7,5 +7,5 @@ import java.util.List;
 public interface WardService {
     List<Ward> getAllWards();
     Ward getWardById(Long id);
-
+    Ward assignCollectorToWard(Long wardId, Long collectorId);
 }

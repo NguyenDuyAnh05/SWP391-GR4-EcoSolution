@@ -11,6 +11,7 @@ import org.swp391_group4_backend.ecosolution.dto.request.ActivationRequest;
 import org.swp391_group4_backend.ecosolution.dto.request.LoginRequest;
 import org.swp391_group4_backend.ecosolution.dto.request.RegisterRequest;
 import org.swp391_group4_backend.ecosolution.dto.response.ActivationResponse;
+import org.swp391_group4_backend.ecosolution.dto.response.SubscriptionResponse;
 import org.swp391_group4_backend.ecosolution.dto.response.UserResponse;
 import org.swp391_group4_backend.ecosolution.entity.CitizenSubscription;
 import org.swp391_group4_backend.ecosolution.entity.SubscriptionTier;
@@ -65,7 +66,17 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public ActivationResponse activateService(ActivationRequest request, HttpServletRequest httpServletRequest) {
-       //1. Find User, Ward, Tier
+        boolean hasActive = subscriptionRepository.existsByUserIdAndStatus(request.userId(), SubscriptionStatus.ACTIVE);
+        if (hasActive) {
+            throw new RuntimeException("You are ready have an active subscription !");
+        }
+
+        boolean hasPending = subscriptionRepository.existsByUserIdAndStatus(request.userId(), SubscriptionStatus.PENDING_PAYMENT);
+        if (hasPending) {
+            throw new RuntimeException("You need to pay for pending subscription first !");
+        }
+
+        //1. Find User, Ward, Tier
         User user = userRepository.findById(request.userId()).orElseThrow(() -> new RuntimeException("User not found"));
         Ward ward = wardService.getWardById(request.wardId());
         SubscriptionTier tier = tierService.getTierById(request.tierId());
@@ -102,10 +113,25 @@ public class UserServiceImpl implements UserService {
                 .fullName(fullName)
                 .address(user.getAddress())
                 .wardName(ward.getWardName())
-                .subscriptionName(tier.getTierName())
-                .paymentUrl(paymentUrl)
-                .subscriptionStatus(sub.getStatus())
+                .tierType(tier.getTierType())
+                .paymentUrl(paymentUrl) // Trả về URL thanh toán cho FE
+                .message("Initiated VNPay payment. Please complete payment to activate your service.")
                 .build();
+    }
+
+    @Override
+    public SubscriptionResponse getSubscription(Long userId) {
+        return subscriptionRepository.findByUserId(userId).map(sub -> SubscriptionResponse.builder()
+                .id(sub.getId())
+                .userId(sub.getUser().getId())
+                .tierType(sub.getTier().getTierType().name())
+                .monthlyFee(sub.getTier().getMonthlyFee())
+                .frequencyDays(sub.getTier().getFrequencyDays())
+                .status(sub.getStatus())
+                .startDate(sub.getStartDate())
+                .endDate(sub.getEndDate())
+                .build()
+        ).orElseThrow(() -> new RuntimeException("No subscription found user"));
     }
 
     private String fullName(User user) {

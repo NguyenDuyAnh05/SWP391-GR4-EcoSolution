@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.swp391_group4_backend.ecosolution.dto.request.ActivationRequest;
 import org.swp391_group4_backend.ecosolution.dto.response.ActivationResponse;
+import org.swp391_group4_backend.ecosolution.dto.response.SubscriptionResponse;
 import org.swp391_group4_backend.ecosolution.dto.response.UserResponse;
 import org.swp391_group4_backend.ecosolution.service.UserService;
 
@@ -28,6 +29,16 @@ public class UserController {
     public ResponseEntity<UserResponse> getMyProfile(){
         return null;
     }
+
+    @GetMapping("/{userId}/subscription")
+    public ResponseEntity<SubscriptionResponse> getSubscription(@PathVariable Long userId) {
+        try {
+            return ResponseEntity.ok(userService.getSubscription(userId));
+        } catch (Exception e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
 
 
 }

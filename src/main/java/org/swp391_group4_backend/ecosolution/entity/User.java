@@ -1,16 +1,14 @@
 package org.swp391_group4_backend.ecosolution.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.swp391_group4_backend.ecosolution.constant.UserRole;
 
 import java.time.LocalDateTime;
 
 @Entity
-@Data
+@Getter // Dùng Getter/Setter thay cho @Data để tránh vòng lặp toString tự động
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -22,15 +20,9 @@ public class User {
 
     @Column(unique = true, nullable = false)
     private String username;
-
-    @Column(nullable = false)
     private String password;
-
-   @Column(nullable = false)
     private String firstName;
-    @Column(nullable = false)
     private String lastName;
-    @Column(nullable = false)
     private String phone;
 
     @Column(columnDefinition = "TEXT")
@@ -39,11 +31,17 @@ public class User {
     @Enumerated(EnumType.STRING)
     private UserRole role;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ward_id")
     private Ward ward;
 
+    private Double latitude;
+    private Double longitude;
+
+    @Builder.Default // QUAN TRỌNG: Để Builder không làm mất giá trị mặc định
     private LocalDateTime createdAt = LocalDateTime.now();
 
-
+    public String getFullName(){
+        return firstName + " " + lastName;
+    }
 }

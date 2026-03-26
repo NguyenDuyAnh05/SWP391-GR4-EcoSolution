@@ -5,7 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.swp391_group4_backend.ecosolution.constant.SubscriptionName;
+import org.swp391_group4_backend.ecosolution.constant.TierType;
 
 import java.math.BigDecimal;
 @Entity
@@ -20,7 +20,8 @@ public class SubscriptionTier {
     private Long id;
 
     @Enumerated(EnumType.STRING)
-    private SubscriptionName tierName; // HOUSEHOLD, BUSINESS
+    @Column(name = "tier_type")
+    private TierType tierType; // HOUSEHOLD, BUSINESS
 
     @Column(name = "monthly_fee")
     private BigDecimal monthlyFee;
