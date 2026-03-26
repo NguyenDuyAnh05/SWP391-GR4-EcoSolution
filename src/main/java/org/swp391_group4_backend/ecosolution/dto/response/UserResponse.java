@@ -5,7 +5,6 @@ import org.swp391_group4_backend.ecosolution.constant.UserRole;
 public record UserResponse(
     Long id, 
     String username, 
-    String firstName, 
-    String lastName, 
+    String fullName,
     UserRole role
 ) {}

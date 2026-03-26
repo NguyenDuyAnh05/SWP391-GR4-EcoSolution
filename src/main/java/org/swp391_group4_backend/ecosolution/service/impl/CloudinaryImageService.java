@@ -10,9 +10,9 @@ import java.io.IOException;
 import java.util.Map;
 
 @Service
-public class CloudinaryImageServiceImpl implements ImageService {
+public class CloudinaryImageService implements ImageService {
     private final Cloudinary cloudinary;
-    public CloudinaryImageServiceImpl(Cloudinary cloudinary) {
+    public CloudinaryImageService(Cloudinary cloudinary) {
         this.cloudinary = cloudinary;
     }
     @Override

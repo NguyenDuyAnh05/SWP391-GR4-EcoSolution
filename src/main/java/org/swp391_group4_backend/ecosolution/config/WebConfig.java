@@ -10,9 +10,9 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/api/v1/**") // Áp dụng cho tất cả API bắt đầu bằng /api/v1/
-                .allowedOrigins("http://localhost:5173", "http://localhost:5174") // CHÍNH XÁC là cổng của Vite/React
+                .allowedOrigins("*") // CHÍNH XÁC là cổng của Vite/React
                 .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                 .allowedHeaders("*")
-                .allowCredentials(true);
+                .maxAge(3600); // 1 hour
     }
 }
