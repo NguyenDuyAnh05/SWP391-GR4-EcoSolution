@@ -49,7 +49,15 @@ public class AdminServiceImpl implements AdminService {
     public List<UserResponse> getCollectors() {
         List<User> list = userRepository.findByRole(UserRole.COLLECTOR).orElse(List.of());
         return list.stream()
-                .map(u -> new UserResponse(u.getId(), u.getUsername(), u.getLastName() + " " + u.getFirstName(), u.getRole()))
+                .map(u -> new UserResponse(u.getId(), u.getUsername(), u.getLastName() + " " + u.getFirstName(), u.getRole(), u.getRewardPoints() != null ? u.getRewardPoints() : 0))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<UserResponse> getReceivers() {
+        List<User> list = userRepository.findByRole(UserRole.RECEIVER).orElse(List.of());
+        return list.stream()
+                .map(u -> new UserResponse(u.getId(), u.getUsername(), u.getLastName() + " " + u.getFirstName(), u.getRole(), u.getRewardPoints() != null ? u.getRewardPoints() : 0))
                 .collect(Collectors.toList());
     }
 

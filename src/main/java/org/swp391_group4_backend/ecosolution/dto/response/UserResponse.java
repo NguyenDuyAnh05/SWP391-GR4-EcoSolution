@@ -6,5 +6,6 @@ public record UserResponse(
     Long id, 
     String username, 
     String fullName,
-    UserRole role
+    UserRole role,
+    Integer rewardPoints
 ) {}

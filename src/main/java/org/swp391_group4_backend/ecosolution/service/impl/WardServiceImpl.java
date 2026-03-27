@@ -47,6 +47,19 @@ public class WardServiceImpl implements WardService {
     }
 
     @Override
+    public Ward assignReceiverToWard(Long wardId, Long receiverId) {
+        Ward ward = wardRepository.findById(wardId)
+                .orElseThrow(() -> new RuntimeException("Không tìm thấy Phường này!"));
+
+        User receiver = userRepository.findById(receiverId)
+                .orElseThrow(() -> new RuntimeException("Không tìm thấy Nhân viên này!"));
+
+        receiver.setWard(ward);
+        userRepository.save(receiver);
+        return ward;
+    }
+
+    @Override
     public Ward createWard(Ward ward) {
         return wardRepository.save(ward);
     }

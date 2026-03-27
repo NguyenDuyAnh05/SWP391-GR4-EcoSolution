@@ -49,5 +49,10 @@ public class UserController {
         }
     }
 
+    @GetMapping("/{userId}/transactions")
+    public ResponseEntity<java.util.List<org.swp391_group4_backend.ecosolution.dto.response.TransactionResponse>> getUserTransactions(@PathVariable Long userId) {
+        return ResponseEntity.ok(userService.getUserTransactions(userId));
+    }
+
 
 }

@@ -11,5 +11,6 @@ public interface AdminService {
     
     org.swp391_group4_backend.ecosolution.dto.response.AdminStatsResponse getStats();
     List<org.swp391_group4_backend.ecosolution.dto.response.UserResponse> getCollectors();
+    List<org.swp391_group4_backend.ecosolution.dto.response.UserResponse> getReceivers();
     List<org.swp391_group4_backend.ecosolution.dto.response.TransactionResponse> getAllTransactions();
 }

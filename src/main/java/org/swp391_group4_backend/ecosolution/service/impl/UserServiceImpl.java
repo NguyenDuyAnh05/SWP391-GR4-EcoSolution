@@ -14,12 +14,14 @@ import org.swp391_group4_backend.ecosolution.dto.request.RegisterRequest;
 import org.swp391_group4_backend.ecosolution.dto.response.ActivationResponse;
 import org.swp391_group4_backend.ecosolution.dto.response.SubscriptionResponse;
 import org.swp391_group4_backend.ecosolution.dto.response.UserResponse;
+import org.swp391_group4_backend.ecosolution.dto.response.TransactionResponse;
 import org.swp391_group4_backend.ecosolution.entity.CitizenSubscription;
 import org.swp391_group4_backend.ecosolution.entity.SubscriptionTier;
 import org.swp391_group4_backend.ecosolution.entity.User;
 import org.swp391_group4_backend.ecosolution.entity.Ward;
 import org.swp391_group4_backend.ecosolution.repository.CitizenSubscriptionRepository;
 import org.swp391_group4_backend.ecosolution.repository.UserRepository;
+import org.swp391_group4_backend.ecosolution.repository.PaymentTransactionRepository;
 import org.swp391_group4_backend.ecosolution.service.PaymentService;
 import org.swp391_group4_backend.ecosolution.service.SubscriptionTierService;
 import org.swp391_group4_backend.ecosolution.service.UserService;
@@ -34,6 +36,7 @@ public class UserServiceImpl implements UserService {
     private final SubscriptionTierService tierService;
     private final PaymentService VNPAYPaymentService;
     private final ModelMapper modelMapper;
+    private final PaymentTransactionRepository paymentTransactionRepository;
 
 
 
@@ -47,7 +50,7 @@ public class UserServiceImpl implements UserService {
         }
 
         // Gộp firstName và lastName khi trả về
-        return new UserResponse(user.getId(), user.getUsername(), fullName(user), user.getRole());
+        return new UserResponse(user.getId(), user.getUsername(), fullName(user), user.getRole(), user.getRewardPoints() != null ? user.getRewardPoints() : 0);
     }
 
     @Override
@@ -61,7 +64,7 @@ public class UserServiceImpl implements UserService {
 
         userRepository.save(user);
 
-        return new UserResponse(user.getId(), user.getUsername(), fullName(user), user.getRole());
+        return new UserResponse(user.getId(), user.getUsername(), fullName(user), user.getRole(), 0);
     }
 
     @Override
@@ -75,7 +78,7 @@ public class UserServiceImpl implements UserService {
 
         userRepository.save(user);
 
-        return new UserResponse(user.getId(), user.getUsername(), fullName(user), user.getRole());
+        return new UserResponse(user.getId(), user.getUsername(), fullName(user), user.getRole(), 0);
     }
 
     @Override
@@ -194,6 +197,23 @@ public class UserServiceImpl implements UserService {
                 .filter(s -> s.getStatus() == SubscriptionStatus.PENDING_PAYMENT)
                 .orElseThrow(() -> new RuntimeException("No pending subscription to cancel"));
         subscriptionRepository.delete(pending);
+    }
+
+    @Override
+    public java.util.List<TransactionResponse> getUserTransactions(Long userId) {
+        return paymentTransactionRepository.findAll().stream()
+                .filter(tx -> tx.getSubscription() != null && tx.getSubscription().getUser().getId().equals(userId))
+                .map(tx -> TransactionResponse.builder()
+                        .id(tx.getId())
+                        .subscriptionId(tx.getSubscription().getId())
+                        .amount(tx.getAmount())
+                        .bankCode(tx.getBankCode())
+                        .vnpTransactionNo(tx.getVnpTransactionNo())
+                        .responseCode(tx.getResponseCode())
+                        .orderInfo(tx.getOrderInfo())
+                        .payDate(tx.getPayDate())
+                        .build())
+                .collect(java.util.stream.Collectors.toList());
     }
 
     private String fullName(User user) {

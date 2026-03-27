@@ -19,4 +19,5 @@ public interface UserService {
     SubscriptionResponse getSubscription(Long userId);
     void cancelPendingSubscription(Long userId);
     UserResponse createUserByAdmin(CreateUserRequest request);
+    List<org.swp391_group4_backend.ecosolution.dto.response.TransactionResponse> getUserTransactions(Long userId);
 }

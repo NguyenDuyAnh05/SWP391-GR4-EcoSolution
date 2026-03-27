@@ -43,6 +43,15 @@ public class AdminController {
         return ResponseEntity.ok("Assigned Collector successfully !");
     }
 
+    @PutMapping("/wards/{wardId}/assign-receiver/{receiverId}")
+    public ResponseEntity<String> assignReceiver(
+            @PathVariable Long wardId,
+            @PathVariable Long receiverId) {
+
+        wardService.assignReceiverToWard(wardId, receiverId);
+        return ResponseEntity.ok("Assigned Receiver successfully !");
+    }
+
     @GetMapping("/stats")
     public ResponseEntity<AdminStatsResponse> getStats() {
         return ResponseEntity.ok(adminService.getStats());
@@ -51,6 +60,11 @@ public class AdminController {
     @GetMapping("/collectors")
     public ResponseEntity<List<UserResponse>> getCollectors() {
         return ResponseEntity.ok(adminService.getCollectors());
+    }
+
+    @GetMapping("/receivers")
+    public ResponseEntity<List<UserResponse>> getReceivers() {
+        return ResponseEntity.ok(adminService.getReceivers());
     }
 
     @GetMapping("/transactions")

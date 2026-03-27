@@ -1,0 +1,5 @@
+package org.swp391_group4_backend.ecosolution.constant;
+
+public enum PointTransactionType {
+    EARN_FROM_TRASH, REDEEM_FOR_SUBSCRIPTION
+}
