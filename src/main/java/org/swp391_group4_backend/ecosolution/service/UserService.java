@@ -2,6 +2,7 @@ package org.swp391_group4_backend.ecosolution.service;
 
 import jakarta.servlet.http.HttpServletRequest;
 import org.swp391_group4_backend.ecosolution.dto.request.ActivationRequest;
+import org.swp391_group4_backend.ecosolution.dto.request.CreateUserRequest;
 import org.swp391_group4_backend.ecosolution.dto.request.LoginRequest;
 import org.swp391_group4_backend.ecosolution.dto.request.RegisterRequest;
 import org.swp391_group4_backend.ecosolution.dto.response.ActivationResponse;
@@ -17,4 +18,5 @@ public interface UserService {
     ActivationResponse activateService(ActivationRequest request, HttpServletRequest httpServletRequest);
     SubscriptionResponse getSubscription(Long userId);
     void cancelPendingSubscription(Long userId);
+    UserResponse createUserByAdmin(CreateUserRequest request);
 }

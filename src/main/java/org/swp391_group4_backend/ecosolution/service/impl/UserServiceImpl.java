@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.swp391_group4_backend.ecosolution.constant.SubscriptionStatus;
 import org.swp391_group4_backend.ecosolution.constant.UserRole;
 import org.swp391_group4_backend.ecosolution.dto.request.ActivationRequest;
+import org.swp391_group4_backend.ecosolution.dto.request.CreateUserRequest;
 import org.swp391_group4_backend.ecosolution.dto.request.LoginRequest;
 import org.swp391_group4_backend.ecosolution.dto.request.RegisterRequest;
 import org.swp391_group4_backend.ecosolution.dto.response.ActivationResponse;
@@ -57,6 +58,20 @@ public class UserServiceImpl implements UserService {
 
         User user = modelMapper.map(request, User.class);
         user.setRole(UserRole.CITIZEN);
+
+        userRepository.save(user);
+
+        return new UserResponse(user.getId(), user.getUsername(), fullName(user), user.getRole());
+    }
+
+    @Override
+    public UserResponse createUserByAdmin(CreateUserRequest request) {
+        userRepository.findByUsername(request.username()).ifPresent(u -> {
+            throw new RuntimeException("Username already exists");
+        });
+
+        User user = modelMapper.map(request, User.class);
+        user.setRole(request.role()); // Admin assigns role directly
 
         userRepository.save(user);
 

@@ -9,14 +9,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.swp391_group4_backend.ecosolution.service.impl.WardServiceImpl;
-import org.swp391_group4_backend.ecosolution.repository.UserRepository;
-import org.swp391_group4_backend.ecosolution.repository.PickupTaskRepository;
+import org.swp391_group4_backend.ecosolution.dto.request.CreateUserRequest;
+import org.swp391_group4_backend.ecosolution.dto.response.AdminStatsResponse;
+import org.swp391_group4_backend.ecosolution.dto.response.TransactionResponse;
 import org.swp391_group4_backend.ecosolution.dto.response.AdminStatsResponse;
 import org.swp391_group4_backend.ecosolution.dto.response.UserResponse;
 import org.swp391_group4_backend.ecosolution.constant.UserRole;
-import org.swp391_group4_backend.ecosolution.constant.ReportStatus;
-import org.swp391_group4_backend.ecosolution.entity.User;
-import org.swp391_group4_backend.ecosolution.entity.PickupTask;
+import org.swp391_group4_backend.ecosolution.entity.Ward;
+import org.swp391_group4_backend.ecosolution.service.AdminService;
+import org.swp391_group4_backend.ecosolution.service.UserService;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import jakarta.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.Optional;
@@ -27,8 +31,8 @@ import java.util.Optional;
 @CrossOrigin(origins = "*")
 public class AdminController {
     private final WardServiceImpl wardService;
-    private final UserRepository userRepository;
-    private final PickupTaskRepository pickupTaskRepository;
+    private final UserService userService;
+    private final AdminService adminService;
 
     @PutMapping("/wards/{wardId}/assign-collector/{collectorId}")
     public ResponseEntity<String> assignCollector(
@@ -41,22 +45,31 @@ public class AdminController {
 
     @GetMapping("/stats")
     public ResponseEntity<AdminStatsResponse> getStats() {
-        long citizens = userRepository.findByRole(UserRole.CITIZEN).orElse(List.of()).size();
-        long collectors = userRepository.findByRole(UserRole.COLLECTOR).orElse(List.of()).size();
-        
-        List<PickupTask> allTasks = pickupTaskRepository.findAll();
-        long pending = allTasks.stream().filter(t -> t.getStatus() == ReportStatus.PENDING).count();
-        long completed = allTasks.stream().filter(t -> t.getStatus() == ReportStatus.COMPLETED).count();
-
-        return ResponseEntity.ok(new AdminStatsResponse(citizens, collectors, pending, completed));
+        return ResponseEntity.ok(adminService.getStats());
     }
 
     @GetMapping("/collectors")
     public ResponseEntity<List<UserResponse>> getCollectors() {
-        List<User> list = userRepository.findByRole(UserRole.COLLECTOR).orElse(List.of());
-        List<UserResponse> res = list.stream()
-            .map(u -> new UserResponse(u.getId(), u.getUsername(), u.getLastName() + " " + u.getFirstName(), u.getRole()))
-            .collect(Collectors.toList());
-        return ResponseEntity.ok(res);
+        return ResponseEntity.ok(adminService.getCollectors());
+    }
+
+    @GetMapping("/transactions")
+    public ResponseEntity<List<TransactionResponse>> getAllTransactions() {
+        return ResponseEntity.ok(adminService.getAllTransactions());
+    }
+
+    @PostMapping("/wards")
+    public ResponseEntity<Ward> createWard(@RequestBody Ward ward) {
+        return ResponseEntity.ok(wardService.createWard(ward));
+    }
+
+    @PutMapping("/wards/{wardId}")
+    public ResponseEntity<Ward> updateWard(@PathVariable Long wardId, @RequestBody Ward ward) {
+        return ResponseEntity.ok(wardService.updateWard(wardId, ward));
+    }
+
+    @PostMapping("/users")
+    public ResponseEntity<UserResponse> createUser(@Valid @RequestBody CreateUserRequest request) {
+        return ResponseEntity.ok(userService.createUserByAdmin(request));
     }
 }

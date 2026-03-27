@@ -43,5 +43,18 @@ public class WardServiceImpl implements WardService {
 
         // 3. Gán và Lưu vào DB
         ward.setCollector(collector);
-        return wardRepository.save(ward);    }
+        return wardRepository.save(ward);    
+    }
+
+    @Override
+    public Ward createWard(Ward ward) {
+        return wardRepository.save(ward);
+    }
+
+    @Override
+    public Ward updateWard(Long wardId, Ward wardDetails) {
+        Ward existingWard = getWardById(wardId);
+        existingWard.setWardName(wardDetails.getWardName());
+        return wardRepository.save(existingWard);
+    }
 }
