@@ -103,26 +103,62 @@ public class UserServiceImpl implements UserService {
         user.setLongitude(request.longitude());
         userRepository.save(user);
 
-        //3. Create a subscription with status PENDING
+        //3. Create a subscription
         CitizenSubscription sub = new CitizenSubscription();
         sub.setUser(user);
         sub.setTier(tier);
+        
+        // 4. BỘ NÃO TÍNH TOÁN (BUSINESS LOGIC)
+        long POINT_CONVERSION_RATE = 1000L; // 1 EcoPoint = 1000 VND
+        long originalFee = tier.getMonthlyFee().longValue();
+        int availablePoints = user.getRewardPoints() != null ? user.getRewardPoints() : 0;
+        
+        long discount = availablePoints * POINT_CONVERSION_RATE;
+        long finalAmount = originalFee - discount;
+        
+        if (finalAmount < 0) {
+            finalAmount = 0;
+        }
+
+        // Tính số điểm thực sự đã dùng
+        int pointsUsed = 0;
+        if (availablePoints > 0) {
+            if (discount >= originalFee) {
+                // Chỉ dùng đủ số điểm để trả hóa đơn
+                pointsUsed = (int) Math.ceil((double) originalFee / POINT_CONVERSION_RATE);
+            } else {
+                pointsUsed = availablePoints;
+            }
+            user.setRewardPoints(availablePoints - pointsUsed);
+            userRepository.save(user); // Lưu điểm đã trừ
+            // TOD0: Lưu lịch sử trừ điểm vào bảng PointTransaction (Thực hiện ở feature Points sau)
+        }
+
+        // 5. Kiểm tra trường hợp đặc biệt: Thanh toán 100% bằng điểm
+        if (finalAmount == 0) {
+            sub.setStatus(SubscriptionStatus.ACTIVE);
+            sub.setStartDate(java.time.LocalDate.now());
+            sub.setEndDate(java.time.LocalDate.now().plusDays(tier.getFrequencyDays()));
+            subscriptionRepository.save(sub);
+            
+            return buildActivationResponse(user, ward, tier, sub, null, "Kích hoạt gói thành công bằng Eco-points! Không cần thanh toán qua VNPay.");
+        }
+
+        // 6. Trường hợp cần thanh toán phần còn lại qua VNPay
         sub.setStatus(SubscriptionStatus.PENDING_PAYMENT);
         subscriptionRepository.save(sub);
 
-        //4. Get VNPAY link
         String paymentUrl = VNPAYPaymentService.createPaymentUrl(
-                tier.getMonthlyFee(),
+                finalAmount,
                 "PaymentForSubID" + sub.getId(),
                 String.valueOf(sub.getId()),
                 httpServletRequest
         );
 
+        return buildActivationResponse(user, ward, tier, sub, paymentUrl, "Initiated VNPay payment. Please complete payment to activate your service.");    
+    }
 
-        // 2. Chuyển phần mapping lằng nhằng xuống hàm phụ
-        return buildActivationResponse(user, ward, tier, sub, paymentUrl);    }
-
-    private ActivationResponse buildActivationResponse(User user, Ward ward, SubscriptionTier tier, CitizenSubscription sub, String paymentUrl) {
+    private ActivationResponse buildActivationResponse(User user, Ward ward, SubscriptionTier tier, CitizenSubscription sub, String paymentUrl, String message) {
         String fullName = fullName(user);
 
         return ActivationResponse.builder()
@@ -132,7 +168,7 @@ public class UserServiceImpl implements UserService {
                 .wardName(ward.getWardName())
                 .tierType(tier.getTierType())
                 .paymentUrl(paymentUrl) // Trả về URL thanh toán cho FE
-                .message("Initiated VNPay payment. Please complete payment to activate your service.")
+                .message(message)
                 .build();
     }
 

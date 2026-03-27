@@ -21,14 +21,15 @@ public class VNPAYPaymentService implements PaymentService {
     }
 
     @Override
-    public String createPaymentUrl(BigDecimal amount, String orderInfo,String vnp_TxnRef, HttpServletRequest request) {
+    public String createPaymentUrl(long finalAmount, String orderInfo, String vnp_TxnRef, HttpServletRequest request) {
         // 1. Các tham số cơ bản
         String vnp_Version = vnPayConfig.vnp_Version;
         String vnp_Command = vnPayConfig.vnp_Command;
         //String vnp_TxnRef = vnPayConfig.getRandomNumber(8); // Mã giao dịch
         String vnp_IpAddr = "127.0.0.1"; // Trong thực tế lấy từ request.getRemoteAddr()
         String vnp_TmnCode = vnPayConfig.vnp_TmnCode;
-        long amountInVnPayFormat = amount.multiply(new BigDecimal(100)).longValue(); // VNPay yêu cầu số tiền nhân 100
+        long amountInVnPayFormat = finalAmount * 100L; // VNPay yêu cầu số tiền nhân 100
+
         // 2. Đưa tham số vào Map (VNPay yêu cầu phải sắp xếp theo bảng chữ cái)
         Map<String, String> vnp_Params = new HashMap<>();
         vnp_Params.put("vnp_Version", vnp_Version);

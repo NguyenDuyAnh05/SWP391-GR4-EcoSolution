@@ -5,6 +5,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import java.math.BigDecimal;
 
 public interface PaymentService {
-    String createPaymentUrl(BigDecimal amount, String orderInfo, String vnp_TxnRef, HttpServletRequest request);
+    String createPaymentUrl(long finalAmount, String orderInfo, String vnp_TxnRef, HttpServletRequest request);
 
 }

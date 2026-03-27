@@ -4,5 +4,5 @@ public enum WasteType {
     RECYCLABLE,
     NON_RECYCLABLE,
     HAZARDOUS,
-    ALL
+
 }

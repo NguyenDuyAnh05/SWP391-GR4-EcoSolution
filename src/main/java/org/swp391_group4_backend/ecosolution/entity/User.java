@@ -41,6 +41,10 @@ public class User {
     @Builder.Default // QUAN TRỌNG: Để Builder không làm mất giá trị mặc định
     private LocalDateTime createdAt = LocalDateTime.now();
 
+    @Builder.Default
+    @Column(name = "reward_points")
+    private Integer rewardPoints = 0;
+
     public String getFullName(){
         return firstName + " " + lastName;
     }
