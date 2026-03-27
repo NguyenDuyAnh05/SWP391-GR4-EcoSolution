@@ -50,7 +50,7 @@ public class UserServiceImpl implements UserService {
         }
 
         // Gộp firstName và lastName khi trả về
-        return new UserResponse(user.getId(), user.getUsername(), fullName(user), user.getRole(), user.getRewardPoints() != null ? user.getRewardPoints() : 0);
+        return new UserResponse(user.getId(), user.getUsername(), fullName(user), user.getRole(), user.getRewardPoints() != null ? user.getRewardPoints() : 0, user.getWard() != null ? user.getWard().getId() : null);
     }
 
     @Override
@@ -64,7 +64,7 @@ public class UserServiceImpl implements UserService {
 
         userRepository.save(user);
 
-        return new UserResponse(user.getId(), user.getUsername(), fullName(user), user.getRole(), 0);
+        return new UserResponse(user.getId(), user.getUsername(), fullName(user), user.getRole(), 0, user.getWard() != null ? user.getWard().getId() : null);
     }
 
     @Override
@@ -78,7 +78,7 @@ public class UserServiceImpl implements UserService {
 
         userRepository.save(user);
 
-        return new UserResponse(user.getId(), user.getUsername(), fullName(user), user.getRole(), 0);
+        return new UserResponse(user.getId(), user.getUsername(), fullName(user), user.getRole(), 0, user.getWard() != null ? user.getWard().getId() : null);
     }
 
     @Override

@@ -54,9 +54,13 @@ public class WardServiceImpl implements WardService {
         User receiver = userRepository.findById(receiverId)
                 .orElseThrow(() -> new RuntimeException("Không tìm thấy Nhân viên này!"));
 
+        // Save on both sides:
+        // 1. ward.receiver → makes GET /wards show receiver (for Admin table)
+        // 2. receiver.ward  → makes GET /pending filter by ward (for Receiver dashboard)
+        ward.setReceiver(receiver);
         receiver.setWard(ward);
         userRepository.save(receiver);
-        return ward;
+        return wardRepository.save(ward);
     }
 
     @Override

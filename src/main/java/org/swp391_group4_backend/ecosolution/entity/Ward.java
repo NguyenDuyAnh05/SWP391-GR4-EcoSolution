@@ -1,7 +1,7 @@
 package org.swp391_group4_backend.ecosolution.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -19,5 +19,11 @@ public class Ward {
 
     @ManyToOne
     @JoinColumn(name = "collector_id")
+    @JsonIgnoreProperties("ward")
     private User collector;
+
+    @ManyToOne
+    @JoinColumn(name = "receiver_id")
+    @JsonIgnoreProperties("ward")
+    private User receiver;
 }

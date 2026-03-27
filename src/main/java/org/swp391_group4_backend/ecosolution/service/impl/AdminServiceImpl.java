@@ -49,7 +49,7 @@ public class AdminServiceImpl implements AdminService {
     public List<UserResponse> getCollectors() {
         List<User> list = userRepository.findByRole(UserRole.COLLECTOR).orElse(List.of());
         return list.stream()
-                .map(u -> new UserResponse(u.getId(), u.getUsername(), u.getLastName() + " " + u.getFirstName(), u.getRole(), u.getRewardPoints() != null ? u.getRewardPoints() : 0))
+                .map(u -> new UserResponse(u.getId(), u.getUsername(), u.getLastName() + " " + u.getFirstName(), u.getRole(), u.getRewardPoints() != null ? u.getRewardPoints() : 0, u.getWard() != null ? u.getWard().getId() : null))
                 .collect(Collectors.toList());
     }
 
@@ -57,7 +57,7 @@ public class AdminServiceImpl implements AdminService {
     public List<UserResponse> getReceivers() {
         List<User> list = userRepository.findByRole(UserRole.RECEIVER).orElse(List.of());
         return list.stream()
-                .map(u -> new UserResponse(u.getId(), u.getUsername(), u.getLastName() + " " + u.getFirstName(), u.getRole(), u.getRewardPoints() != null ? u.getRewardPoints() : 0))
+                .map(u -> new UserResponse(u.getId(), u.getUsername(), u.getLastName() + " " + u.getFirstName(), u.getRole(), u.getRewardPoints() != null ? u.getRewardPoints() : 0, u.getWard() != null ? u.getWard().getId() : null))
                 .collect(Collectors.toList());
     }
 

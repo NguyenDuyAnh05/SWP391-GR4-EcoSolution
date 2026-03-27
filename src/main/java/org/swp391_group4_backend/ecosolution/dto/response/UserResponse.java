@@ -3,9 +3,10 @@ package org.swp391_group4_backend.ecosolution.dto.response;
 import org.swp391_group4_backend.ecosolution.constant.UserRole;
 
 public record UserResponse(
-    Long id, 
-    String username, 
+    Long id,
+    String username,
     String fullName,
     UserRole role,
-    Integer rewardPoints
+    Integer rewardPoints,
+    Long wardId
 ) {}
