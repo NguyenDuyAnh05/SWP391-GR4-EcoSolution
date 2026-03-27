@@ -9,7 +9,8 @@ import java.time.LocalDate;
 @Data
 @Builder
 public class PickupTaskResponse {
-    private Long taskId;
+    private Long id;      // Alias: frontend uses task.id
+    private Long taskId;  // Original field for backend consumers
 
     // Thông tin người dân
     private String citizenName;

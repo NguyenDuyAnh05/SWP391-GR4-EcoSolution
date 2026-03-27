@@ -44,7 +44,7 @@ public class DailyTaskScheduler {
 
         for (CitizenSubscription sub : activeSubscriptions) {
 
-            // --- BƯỚC BẢO VỆ (Safety Check) ---
+            // ---  (Safety Check) ---
             if (sub.getTier() == null || sub.getTier().getFrequencyDays() == null || sub.getTier().getFrequencyDays() <= 0) {
                 log.warn("CẢNH BÁO: Gói cước ID {} không có thông tin tần suất thu gom hợp lệ! Bỏ qua.", sub.getId());
                 continue;

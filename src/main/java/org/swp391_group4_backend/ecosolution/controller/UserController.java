@@ -39,6 +39,15 @@ public class UserController {
         }
     }
 
+    @DeleteMapping("/{userId}/subscription/pending")
+    public ResponseEntity<Void> cancelPendingSubscription(@PathVariable Long userId) {
+        try {
+            userService.cancelPendingSubscription(userId);
+            return ResponseEntity.noContent().build();
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().build();
+        }
+    }
 
 
 }

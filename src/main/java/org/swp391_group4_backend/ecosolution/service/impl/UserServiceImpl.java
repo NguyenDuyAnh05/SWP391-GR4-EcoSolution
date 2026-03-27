@@ -84,6 +84,8 @@ public class UserServiceImpl implements UserService {
         //2. Update Citizen address
         user.setWard(ward);
         user.setAddress(request.address());
+        user.setLatitude(request.latitude());
+        user.setLongitude(request.longitude());
         userRepository.save(user);
 
         //3. Create a subscription with status PENDING
@@ -134,7 +136,17 @@ public class UserServiceImpl implements UserService {
         ).orElseThrow(() -> new RuntimeException("No subscription found user"));
     }
 
+    @Override
+    @Transactional
+    public void cancelPendingSubscription(Long userId) {
+        CitizenSubscription pending = subscriptionRepository.findByUserId(userId)
+                .filter(s -> s.getStatus() == SubscriptionStatus.PENDING_PAYMENT)
+                .orElseThrow(() -> new RuntimeException("No pending subscription to cancel"));
+        subscriptionRepository.delete(pending);
+    }
+
     private String fullName(User user) {
         return user.getLastName() + " " + user.getFirstName();
     }
 }
+

@@ -36,7 +36,7 @@ public class AdminController {
             @PathVariable Long collectorId) {
 
         wardService.assignCollectorToWard(wardId, collectorId);
-        return ResponseEntity.ok("Đã phân công nhân viên phụ trách phường thành công!");
+        return ResponseEntity.ok("Assigned Collector successfully !");
     }
 
     @GetMapping("/stats")

@@ -16,5 +16,5 @@ public interface UserService {
     UserResponse register(RegisterRequest request);
     ActivationResponse activateService(ActivationRequest request, HttpServletRequest httpServletRequest);
     SubscriptionResponse getSubscription(Long userId);
-
+    void cancelPendingSubscription(Long userId);
 }

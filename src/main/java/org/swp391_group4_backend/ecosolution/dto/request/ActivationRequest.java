@@ -9,9 +9,7 @@ public record ActivationRequest(
         @NotNull(message = "Subscription Tier ID is required") Long tierId,
         @NotBlank(message = "Address is required") String address,
 
-        @NotNull(message = "Latitude (Vĩ độ) is required")
-                Double latitude,
-        @NotNull(message = "Longitude (Kinh độ) is required")
+        Double latitude,
         Double longitude
 ) {
 }

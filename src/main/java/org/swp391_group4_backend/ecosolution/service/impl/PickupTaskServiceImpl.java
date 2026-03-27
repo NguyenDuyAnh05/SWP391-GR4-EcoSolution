@@ -13,7 +13,6 @@ import org.swp391_group4_backend.ecosolution.repository.UserRepository;
 import org.swp391_group4_backend.ecosolution.service.PickupTaskService;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -25,51 +24,43 @@ public class PickupTaskServiceImpl implements PickupTaskService {
 
     @Override
     public List<PickupTaskResponse> getTasksForCollector(Long collectedId, LocalDate date) {
-        // 1. Kiểm tra nhân viên có tồn tại không
         User collector = userRepository.findById(collectedId)
-                .orElseThrow(() -> new RuntimeException("Không tìm thấy nhân viên thu gom!"));
+                .orElseThrow(() -> new RuntimeException("Collector not found!"));
 
-        // 2. Lấy danh sách việc từ Database
         List<PickupTask> tasks = taskRepository.findByCollectorAndScheduledDate(collector, date);
 
-        // 3. Chuyển đổi (Map) từ Entity sang DTO để trả về cho Frontend
-        return tasks.stream().map(task -> PickupTaskResponse.builder()
-                .taskId(task.getId())
-                .citizenName(task.getSubscription().getUser().getFullName()) // Giả sử User có getFullName()
-                .phone(task.getSubscription().getUser().getPhone()) // Giả sử User có getPhoneNumber()
-                // Chú ý: Cần lấy address từ đâu đó, giả sử User có thuộc tính address
-                .address(task.getSubscription().getUser().getAddress())
-                .latitude(task.getLatitude())
-                .longitude(task.getLongitude())
-                .scheduledDate(task.getScheduledDate())
-                .status(task.getStatus())
-                .tierType(task.getSubscription().getTier().getTierType())
-                .build()
-        ).collect(Collectors.toList());
+        return tasks.stream().map(task -> {
+            // Address & coordinates come from the citizen's user profile
+            User citizen = task.getSubscription().getUser();
+            return PickupTaskResponse.builder()
+                    .taskId(task.getId())
+                    .id(task.getId()) // Alias for frontend compatibility
+                    .citizenName(citizen.getFullName())
+                    .phone(citizen.getPhone())
+                    .address(citizen.getAddress())
+                    // Use citizen's registered coordinates (more reliable than task-level lat/lng)
+                    .latitude(citizen.getLatitude())
+                    .longitude(citizen.getLongitude())
+                    .scheduledDate(task.getScheduledDate())
+                    .status(task.getStatus())
+                    .tierType(task.getSubscription().getTier().getTierType())
+                    .proofImageUrl(task.getProofImageUrl())
+                    .build();
+        }).collect(Collectors.toList());
     }
 
+    @Override
     @Transactional
-    public void completeTask(Long taskId, Long collectorId, CompleteTaskRequest request) {
-        // 1. Tìm tác vụ trong DB
+    public void completeTask(Long taskId, CompleteTaskRequest request) {
         PickupTask task = taskRepository.findById(taskId)
-                .orElseThrow(() -> new RuntimeException("Cannot find this task!"));
+                .orElseThrow(() -> new RuntimeException("Task not found!"));
 
-        // 2. Bảo mật: Kiểm tra xem task này có đúng là của ông nhân viên đang đăng nhập không
-        if (task.getCollector() == null || !task.getCollector().getId().equals(collectorId)) {
-            throw new RuntimeException("You are not allowed to complete this task!");
-        }
-
-        // 3. Kiểm tra trạng thái: Nếu đã hoàn thành rồi thì báo lỗi tránh spam
         if (ReportStatus.COMPLETED.equals(task.getStatus())) {
-            throw new RuntimeException("This task has already been completed!");
+            throw new RuntimeException("This task is already completed!");
         }
 
-        // 4. Cập nhật thông tin
         task.setProofImageUrl(request.getProofImageUrl());
-        task.setStatus(ReportStatus.COMPLETED); // Chuyển trạng thái
-
-        // [GIỮ CHỖ Ở ĐÂY CHO LUỒNG SỐ 2: CỘNG ĐIỂM ECO-POINTS]
-        // Ví dụ: userService.addEcoPoints(task.getSubscription().getUser().getId(), 10);
+        task.setStatus(ReportStatus.COMPLETED);
 
         taskRepository.save(task);
     }
@@ -77,18 +68,21 @@ public class PickupTaskServiceImpl implements PickupTaskService {
     @Override
     public List<PickupTaskResponse> getTasksForCitizen(Long citizenId) {
         List<PickupTask> tasks = taskRepository.findBySubscriptionUserId(citizenId);
-        return tasks.stream().map(task -> PickupTaskResponse.builder()
-                .taskId(task.getId())
-                .citizenName(task.getSubscription().getUser().getFullName())
-                .phone(task.getSubscription().getUser().getPhone())
-                .address(task.getSubscription().getUser().getAddress())
-                .latitude(task.getLatitude())
-                .longitude(task.getLongitude())
-                .scheduledDate(task.getScheduledDate())
-                .status(task.getStatus())
-                .tierType(task.getSubscription().getTier().getTierType())
-                .proofImageUrl(task.getProofImageUrl())
-                .build()
-        ).collect(Collectors.toList());
+        return tasks.stream().map(task -> {
+            User citizen = task.getSubscription().getUser();
+            return PickupTaskResponse.builder()
+                    .taskId(task.getId())
+                    .id(task.getId())
+                    .citizenName(citizen.getFullName())
+                    .phone(citizen.getPhone())
+                    .address(citizen.getAddress())
+                    .latitude(citizen.getLatitude())
+                    .longitude(citizen.getLongitude())
+                    .scheduledDate(task.getScheduledDate())
+                    .status(task.getStatus())
+                    .tierType(task.getSubscription().getTier().getTierType())
+                    .proofImageUrl(task.getProofImageUrl())
+                    .build();
+        }).collect(Collectors.toList());
     }
 }
