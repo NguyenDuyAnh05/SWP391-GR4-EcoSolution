@@ -46,7 +46,7 @@ public class DailyTaskScheduler {
 
             // ---  (Safety Check) ---
             if (sub.getTier() == null || sub.getTier().getFrequencyDays() == null || sub.getTier().getFrequencyDays() <= 0) {
-                log.warn("CẢNH BÁO: Gói cước ID {} không có thông tin tần suất thu gom hợp lệ! Bỏ qua.", sub.getId());
+                log.warn("WARNING: Subscription ID {} doesn't have valid collecting frequency! Skip.", sub.getId());
                 continue;
             }
 
@@ -61,20 +61,20 @@ public class DailyTaskScheduler {
 
                     User assignedCollector = null;
 
-                    // Đã fix lỗi 3: Check Null cẩn thận để chống sập Server
+                    // Check Null cẩn thận để chống sập Server
                     if (sub.getUser() != null && sub.getUser().getWard() != null) {
                         String citizenWardName = sub.getUser().getWard().getWardName();
 
-                        // Tra cứu Phường trong DB -> Rút ông Collector ra
+                        // Tra cứu Phường trong DB -> Lấy Collector ra
                         assignedCollector = wardRepository.findByWardName(citizenWardName)
                                 .map(Ward::getCollector)
                                 .orElse(null);
 
                         if (assignedCollector == null) {
-                            log.warn("Lưu ý: Phường '{}' chưa có nhân viên phụ trách. Task sẽ để trống nhân viên!", citizenWardName);
+                            log.warn("NOTE!!!: WARD '{}' Doesn't have any assigned Collector. Task will not be shown !", citizenWardName);
                         }
                     } else {
-                        log.warn("Lưu ý: Citizen ID {} không có thông tin Phường hợp lệ. Không thể gán Collector tự động!", sub.getUser().getId());
+                        log.warn("NOTE!!!: Citizen ID {} Doesn't have valid ward. Cannot assign to collector automatically!", sub.getUser().getId());
                     }
 
                     PickupTask newTask = PickupTask.builder()

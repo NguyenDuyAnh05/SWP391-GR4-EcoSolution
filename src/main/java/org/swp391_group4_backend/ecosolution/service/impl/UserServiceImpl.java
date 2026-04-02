@@ -27,6 +27,8 @@ import org.swp391_group4_backend.ecosolution.service.SubscriptionTierService;
 import org.swp391_group4_backend.ecosolution.service.UserService;
 import org.swp391_group4_backend.ecosolution.service.WardService;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
@@ -200,7 +202,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public java.util.List<TransactionResponse> getUserTransactions(Long userId) {
+    public List<TransactionResponse> getUserTransactions(Long userId) {
         return paymentTransactionRepository.findAll().stream()
                 .filter(tx -> tx.getSubscription() != null && tx.getSubscription().getUser().getId().equals(userId))
                 .map(tx -> TransactionResponse.builder()
