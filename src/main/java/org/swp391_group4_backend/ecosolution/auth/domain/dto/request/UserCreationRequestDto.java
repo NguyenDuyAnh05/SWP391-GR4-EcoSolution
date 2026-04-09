@@ -12,6 +12,10 @@ public record UserCreationRequestDto(
         String email,
 
         @NotNull
+        @NotBlank(message = "Username must not be blank")
+        String username,
+
+        @NotNull
         @Size(min=8, message = "Password must be at least 8 characters long")
         String password,
 

@@ -28,6 +28,11 @@ public class CollectorScoreServiceImpl implements CollectorScoreService {
   }
 
   @Override
+  public Optional<CollectorScore> getByCollectorId(UUID collectorId) {
+    return collectorScoreRepository.findByCollectorId(collectorId);
+  }
+
+  @Override
   public List<CollectorScore> getAll() {
     return collectorScoreRepository.findAll();
   }
@@ -43,6 +48,3 @@ public class CollectorScoreServiceImpl implements CollectorScoreService {
     collectorScoreRepository.deleteById(id);
   }
 }
-
-
-

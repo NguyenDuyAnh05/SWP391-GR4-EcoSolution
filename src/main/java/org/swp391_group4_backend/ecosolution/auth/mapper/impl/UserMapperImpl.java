@@ -13,6 +13,7 @@ public class UserMapperImpl implements UserMapper {
   public UserCreationRequest fromDto(UserCreationRequestDto request) {
     return new UserCreationRequest(
             request.email(),
+            request.username(),
             request.password(),
             request.name()
     );

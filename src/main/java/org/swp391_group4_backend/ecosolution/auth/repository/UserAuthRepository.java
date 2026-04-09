@@ -1,7 +1,6 @@
 package org.swp391_group4_backend.ecosolution.auth.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 import org.swp391_group4_backend.ecosolution.auth.domain.entity.UserAuth;
 
 import java.util.Optional;
@@ -24,4 +23,3 @@ public interface UserAuthRepository extends JpaRepository<UserAuth, UUID> {
   // Check if Google ID exists
   boolean existsByGoogleId(String googleId);
 }
-
